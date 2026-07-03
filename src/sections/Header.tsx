@@ -4,8 +4,8 @@ import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 function Header() {
   return (
-    <header className="font-sans">
-      <nav className="navbar bg-base-100 shadow-sm">
+    <header className="bg-base-100 font-sans shadow-sm">
+      <nav className="navbar">
         <div className="container mx-auto flex">
           <div className="flex-1">
             <Link to="/" className="btn btn-ghost font-display text-3xl">
