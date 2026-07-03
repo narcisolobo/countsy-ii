@@ -1,27 +1,21 @@
-import { Fragment } from "react";
-import { useCreateCounter } from "@/hooks/useCreateCounter";
 import { type Counter } from "@/types/counter";
+import { Fragment } from "react";
 import CounterCard from "./CounterCard";
+import CreateCounterButton from "./CreateCounterButton";
+import EmptyCounterCard from "./EmptyCounterCard";
 
 interface CounterListProps {
   filteredCounters: Counter[] | undefined;
 }
 
 function CounterList({ filteredCounters }: CounterListProps) {
-  const createCounter = useCreateCounter(filteredCounters?.length || 0);
-
   if (filteredCounters?.length === 0) {
     return (
       <Fragment>
         <p className="text-base-content/70 mb-4">
           You don't have any counters yet. Let's fix that!
         </p>
-        <button
-          className="btn btn-primary"
-          onClick={() => createCounter.mutate()}
-        >
-          + Create Counter
-        </button>
+        <CreateCounterButton filteredCountersLength={0} />
       </Fragment>
     );
   }
@@ -33,13 +27,8 @@ function CounterList({ filteredCounters }: CounterListProps) {
           filteredCounters.map((counter) => (
             <CounterCard key={counter.id} counter={counter} />
           ))}
+        <EmptyCounterCard filteredCountersLength={filteredCounters?.length} />
       </div>
-      <button
-        className="btn btn-primary fixed right-6 bottom-6 rounded-full"
-        onClick={() => createCounter.mutate()}
-      >
-        +
-      </button>
     </Fragment>
   );
 }

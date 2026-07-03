@@ -1,10 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import CounterList from "@/components/counters/CounterList";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { useAuth } from "../hooks/useAuth";
-import { supabase } from "../lib/supabase-client";
-import type { Counter } from "../types/counter";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/lib/supabase-client";
+import type { Counter } from "@/types/counter";
+import CreateCounterButton from "@/components/counters/CreateCounterButton";
 
 function CountersPage() {
   const [showArchived, setShowArchived] = useState(false);
@@ -49,15 +50,18 @@ function CountersPage() {
 
   return (
     <section id="counters" className="bg-base-200 text-center">
-      <div className="mx-auto min-h-[70vh] max-w-5xl px-4 md:px-6">
+      <div className="mx-auto min-h-[70vh] max-w-5xl px-4 py-12">
         <h1 className="mb-6 text-3xl font-bold">Your Counters</h1>
-        <div className="mb-4 flex justify-end">
+        <div className="mb-4 flex justify-end gap-4">
           <button
-            className="btn btn-sm btn-outline"
+            className="btn btn-outline"
             onClick={() => setShowArchived((prev) => !prev)}
           >
             {showArchived ? "Hide Archived" : "Show Archived"}
           </button>
+          <CreateCounterButton
+            filteredCountersLength={filteredCounters.length || 0}
+          />
         </div>
         <CounterList filteredCounters={filteredCounters} />
       </div>

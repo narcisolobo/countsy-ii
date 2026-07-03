@@ -22,7 +22,6 @@ function App() {
 
   const drawerItemsSignedIn: DrawerItem[] = [
     { label: "Counters", href: "/counters" },
-    { label: "Settings", href: "/settings" },
     { label: "Sign out", onClick: () => handleSignOut(navigate) },
   ];
 

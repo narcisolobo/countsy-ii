@@ -1,77 +1,49 @@
-# React + TypeScript + Vite
+# Countsy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+_Track anything. Count everything._
 
-Currently, two official plugins are available:
+![Countsy Screenshot](./screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Countsy is a lightweight web app that lets you create and manage custom counters for anything you want — habits, projects, inventory, goals, and more.
 
-## React Compiler
+Whether you’re tracking water intake, completed tasks, or inventory stock, Countsy keeps your tallies organized and accessible.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Built with **React**, **DaisyUI**, **Supabase**, and **Lucide**, Countsy offers a clean, fast, and mobile-friendly experience.
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+## ✨ Motivation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+This project began as an experiment: take the most ubiquitous coding example — a counter — and build something full-featured and production-ready out of it. Along the way, I wanted to deepen my experience with **Supabase**, learn to implement modern **authentication flows**, and explore best practices in component design, state management, and database structure.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+The idea was simple: prove that even a humble counter app can be thoughtful, elegant, and technically instructive.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Tech Stack
 
-```
+- **Frontend:** [React](https://reactjs.org), [Vite](https://vitejs.dev), [TypeScript](https://www.typescriptlang.org)
+- **UI:** [Tailwind CSS](https://tailwindcss.com), [DaisyUI](https://daisyui.com), [Lucide Icons](https://lucide.dev)
+- **Backend-as-a-Service:** [Supabase](https://supabase.com)
+  - Auth (email + Google login)
+  - Realtime Database (PostgreSQL + Row Level Security)
+- **Hosting:** [Vercel](https://vercel.com)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Features
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Create multiple named counters
+- Inline editing for counter titles
+- Optional goals per counter
+- Increment/decrement counters
+- Archive and unarchive counters
+- Responsive UI for mobile & desktop
+- Email and Google authentication
+- Secure, per-user data isolation via Supabase RLS
 
-```
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](./LICENSE.md).
