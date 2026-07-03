@@ -16,7 +16,7 @@ function Footer() {
         <nav>
           <div className="grid grid-flow-col gap-4">
             <a
-              href="https://github.com/narcisolobo/countsy"
+              href="https://github.com/narcisolobo/countsy-ii"
               aria-label="GitHub"
               target="_blank"
               rel="noopener noreferrer"
@@ -32,7 +32,7 @@ function Footer() {
               </svg>
             </a>
             <a
-              href="https://www.cisocodes.com"
+              href="https://www.narcisolobo.com"
               aria-label="Narciso Lobo portfolio"
               className="hover:underline"
               target="_blank"
