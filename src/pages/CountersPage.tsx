@@ -50,7 +50,7 @@ function CountersPage() {
 
   return (
     <section id="counters" className="bg-base-200 text-center">
-      <div className="mx-auto min-h-[70vh] max-w-5xl px-4 py-12">
+      <div className="container mx-auto min-h-[70vh] px-4 py-12">
         <h1 className="mb-6 text-3xl font-bold">Your Counters</h1>
         <div className="mb-4 flex justify-end gap-4">
           <button
