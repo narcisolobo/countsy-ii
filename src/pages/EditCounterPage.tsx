@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate, useParams } from "react-router";
+import ArchiveModal from "@/components/counters/ArchiveModal";
 import FormInput from "@/components/counters/FormInput";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useAuth } from "@/hooks/useAuth";
@@ -83,6 +84,13 @@ function EditCounterPage() {
     navigate("/counters");
   };
 
+  const showArchiveModal = () => {
+    const modal = document.getElementById(
+      `archive-modal-${id}`,
+    ) as HTMLDialogElement | null;
+    modal?.showModal();
+  };
+
   if (isPending) return <LoadingSpinner />;
 
   if (!counter) {
@@ -137,7 +145,13 @@ function EditCounterPage() {
             </Link>
           </div>
           <div className="tooltip" data-tip="Archive counter">
-            <button className="btn hover:btn-error" type="button">
+            <button
+              className="btn hover:btn-error"
+              type="button"
+              aria-label="Archive counter"
+              disabled={!!counter.is_archived}
+              onClick={showArchiveModal}
+            >
               <Archive />
             </button>
           </div>
@@ -156,6 +170,10 @@ function EditCounterPage() {
           </div>
         </div>
       </form>
+      <ArchiveModal
+        counter={counter}
+        onArchived={() => navigate("/counters")}
+      />
     </section>
   );
 }

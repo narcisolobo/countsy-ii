@@ -3,9 +3,13 @@ import type { Counter } from "@/types/counter";
 
 interface ArchiveModalProps {
   counter: Counter;
+  onArchived?: () => void;
 }
 
-function ArchiveModal({ counter: { id, title } }: ArchiveModalProps) {
+function ArchiveModal({
+  counter: { id, title },
+  onArchived,
+}: ArchiveModalProps) {
   const archive = useArchiveCounter(id);
 
   return (
@@ -26,7 +30,7 @@ function ArchiveModal({ counter: { id, title } }: ArchiveModalProps) {
             {/* Confirm archive button */}
             <button
               className="btn btn-warning"
-              onClick={() => archive.mutate(true)}
+              onClick={() => archive.mutate(true, { onSuccess: onArchived })}
             >
               Yes, archive
             </button>
