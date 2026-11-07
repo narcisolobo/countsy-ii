@@ -1,6 +1,7 @@
 import { Route, Routes, useNavigate } from "react-router";
 import Drawer from "@/components/Drawer";
 import ProtectedRoute from "@/guards/ProtectedRoute";
+import PublicOnlyRoute from "@/guards/PublicOnlyRoute";
 import { useAuth } from "@/hooks/useAuth";
 import { useScrollToHash } from "@/hooks/useScrollToHash";
 import { handleSignOut } from "@/lib/auth";
@@ -37,9 +38,23 @@ function App() {
       <Header />
       <main className="font-sans">
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route
+            path="/"
+            element={
+              <PublicOnlyRoute>
+                <LandingPage />
+              </PublicOnlyRoute>
+            }
+          />
           <Route path="/auth/callback" element={<AuthCallbackPage />} />
-          <Route path="/sign-in" element={<SignInPage />} />
+          <Route
+            path="/sign-in"
+            element={
+              <PublicOnlyRoute>
+                <SignInPage />
+              </PublicOnlyRoute>
+            }
+          />
           <Route
             path="/counters"
             element={
