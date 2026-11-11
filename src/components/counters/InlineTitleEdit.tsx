@@ -43,7 +43,7 @@ function InlineTitleEdit({ counter, initialTitle }: InlineTitleEditProps) {
   }, [isEditing]);
 
   return (
-    <div className="min-w-0 flex-1 self-center py-2">
+    <div className="flex h-[4.25rem] min-w-0 flex-1 items-center">
       {isEditing ? (
         <input
           ref={inputRef}
@@ -59,9 +59,9 @@ function InlineTitleEdit({ counter, initialTitle }: InlineTitleEditProps) {
         <h2 className="min-w-0">
           <button
             type="button"
-            title="Rename"
+            title={`Rename ${initialTitle}`}
             onClick={() => setIsEditing(true)}
-            className="ui-label block max-w-full cursor-pointer text-left text-xl leading-tight break-words"
+            className="ui-label line-clamp-2 max-w-full cursor-pointer text-left text-xl leading-tight break-words"
           >
             {initialTitle}
           </button>
