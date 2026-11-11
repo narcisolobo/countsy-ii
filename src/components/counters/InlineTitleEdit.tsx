@@ -61,7 +61,7 @@ function InlineTitleEdit({ counter, initialTitle }: InlineTitleEditProps) {
             type="button"
             title="Rename"
             onClick={() => setIsEditing(true)}
-            className="ui-label block max-w-full cursor-pointer truncate text-left text-xl"
+            className="ui-label block max-w-full cursor-pointer text-left text-xl leading-tight break-words"
           >
             {initialTitle}
           </button>

@@ -19,7 +19,7 @@ function FormInput({
         id={name}
         className="ui-input"
         aria-invalid={error ? true : undefined}
-        aria-describedby={`${name}-hint`}
+        aria-describedby={error ? `${name}-hint` : undefined}
         type={type}
         required={required}
         placeholder={placeholder}
@@ -33,12 +33,15 @@ function FormInput({
             : {},
         )}
       />
-      <div
-        id={`${name}-hint`}
-        className={error ? "text-ink font-semibold" : "text-ink-muted text-sm"}
-      >
-        {error?.message ? error.message : placeholder}
-      </div>
+      {error?.message && (
+        <div
+          id={`${name}-hint`}
+          role="alert"
+          className="text-ink font-semibold"
+        >
+          {error.message}
+        </div>
+      )}
     </div>
   );
 }

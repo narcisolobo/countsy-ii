@@ -30,7 +30,7 @@ function TermsPage() {
             editing, and archiving.
           </p>
           <h2 className="ui-label mt-8 mb-2 text-xl">3. User Accounts</h2>
-          <ul className="mb-4 list-inside list-disc">
+          <ul className="mb-4 ml-6 list-disc">
             <li>
               You are responsible for maintaining the confidentiality of your
               login credentials.
@@ -41,7 +41,7 @@ function TermsPage() {
             </li>
           </ul>
           <h2 className="ui-label mt-8 mb-2 text-xl">4. Use of the Service</h2>
-          <ul className="mb-4 list-inside list-disc">
+          <ul className="mb-4 ml-6 list-disc">
             <li>
               You agree not to misuse the service or interfere with its normal
               operation.
@@ -69,7 +69,7 @@ function TermsPage() {
           <h2 className="ui-label mt-8 mb-2 text-xl">
             7. Disclaimers and Limitation of Liability
           </h2>
-          <ul className="mb-4 list-inside list-disc">
+          <ul className="mb-4 ml-6 list-disc">
             <li>The service is provided "as is" with no warranties.</li>
             <li>
               We are not liable for any damages resulting from your use of the

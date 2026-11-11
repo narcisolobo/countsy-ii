@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Archive, ArrowBigLeftDash, Loader2, Save } from "lucide-react";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate, useParams } from "react-router";
@@ -41,7 +40,6 @@ function EditCounterPage() {
     formState: { errors, isSubmitting },
     handleSubmit,
     register,
-    reset,
   } = useForm<CounterFormValues>({
     resolver: zodResolver(counterSchema),
     defaultValues: {
@@ -49,17 +47,16 @@ function EditCounterPage() {
       goal: undefined,
       value: undefined,
     },
+    // Synced from the loaded counter; unlike reset-in-an-effect this also
+    // fills the form when the data is already cached on first render.
+    values: counter
+      ? {
+          title: counter.title ?? "",
+          goal: counter.goal ?? undefined,
+          value: counter.value ?? 0,
+        }
+      : undefined,
   });
-
-  useEffect(() => {
-    if (counter) {
-      reset({
-        title: counter.title ?? "",
-        goal: counter.goal ?? undefined,
-        value: counter.value ?? undefined,
-      });
-    }
-  }, [counter, reset]);
 
   const onSubmit = async (data: CounterFormValues) => {
     if (!id) return;
@@ -133,9 +130,9 @@ function EditCounterPage() {
         />
         <FormInput
           type="number"
-          placeholder="Enter goal (optional)"
+          placeholder="Enter goal"
           name="goal"
-          label="goal"
+          label="goal (optional)"
           register={register}
           error={errors.goal}
           required={false}
