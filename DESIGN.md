@@ -120,20 +120,20 @@ Density is phone-first and calm. One card per counter, one number per card, a fu
 - Outlined, square-ish controls that fill with ink on press.
 - Numbers as uniform drum digits, never colored per digit.
 - Red appears only as a failed-save state.
-- Motion is action feedback plus one flow-indicator spin.
+- Motion is action feedback only; reaching a goal is the gauge filling to its brim.
 
 ## Colors
 
 A cool, desaturated enamel palette with one blue and one reserved state red. Every pair is chosen for AA contrast.
 
 ### Primary
-- **Meter Blue** (#1f5f8b): the header plate, unit labels, the primary button outline, focus rings, links, and the reached flow indicator. In dark mode the plate becomes Dark Plate (#1a4d70) while text accents lift to Dark Accent Sky (#73b4e0).
+- **Meter Blue** (#1f5f8b): the header plate, unit labels, the primary button outline, focus rings, links, the gauge water, and the reached gauge outline. In dark mode the plate becomes Dark Plate (#1a4d70) while text accents lift to Dark Accent Sky (#73b4e0).
 
 ### Neutral
 - **Enamel Grey** (#eceff1): page ground; also the digit color on drum tiles in light mode. Deliberately cool, not cream.
 - **Porcelain** (#f8fafb): card, input, drawer and dialog surface.
 - **Ink** (#14181c): body text, button outlines and fills on press.
-- **Ink Muted** (#46515a): secondary text, goal line, empty states, input outlines, idle flow indicator.
+- **Ink Muted** (#46515a): secondary text, goal line, empty states, input outlines, the gauge outline before the goal.
 - **Hairline** (#b9c3ca): card borders and dividers.
 - **Drum Black** (#0d1114): tile ground in light mode.
 - **Dark Panel / Dark Surface / Dark Ink / Dark Ink Muted / Dark Hairline** (#101418 / #171c21 / #e6ebef / #9aa7b1 / #2f3a43): the dark-mode counterparts. Dark mode tiles are Dark Ink (#e6ebef) with Dark Panel digits.
@@ -179,7 +179,7 @@ Flat. There are no shadows; the toast explicitly removes its shadow. Depth comes
 
 ## Shapes
 
-Barely-rounded plates: 2px corners on cards, buttons, inputs, drawer items and toasts, with 2px outlines on controls and 1px on cards. Drum tiles are 0.7em wide by 1.3em tall with a 0.06em corner and a 1px mid-line seam at 15% tile-ink, set with 3px gaps. The flow indicator is a circled three-spoke star-wheel on a 40px square; the favicon repeats it in white on a meter-blue 6px-rounded square.
+Barely-rounded plates: 2px corners on cards, buttons, inputs, drawer items and toasts, with 2px outlines on controls and 1px on cards. Drum tiles are 0.7em wide by 1.3em tall with a 0.06em corner and a 1px mid-line seam at 15% tile-ink, set with 3px gaps. The goal gauge is a 14px open-topped glass with 2px sides and a 3px rounded bottom. The favicon is still the old circled three-spoke star-wheel in white on a meter-blue 6px-rounded square.
 
 ## Components
 
@@ -197,13 +197,13 @@ Barely-rounded plates: 2px corners on cards, buttons, inputs, drawer items and t
 - **Error:** message in Ink, semibold, role alert; red is not used for field validation.
 
 ### Counter Card
-Porcelain, 1px hairline, 2px corners. Top row: uppercase blue title (tap to rename inline), edit and archive icon buttons. Then the drum register, with the flow indicator at the right when a goal is set. Below, a goal line, then the minus/plus pair. A failed save shows "Not saved. The count was put back." in Fail Red, semibold.
+Porcelain, 1px hairline, 2px corners. Top row: uppercase blue title (tap to rename inline), edit and archive icon buttons. Then the drum register, a goal line, then the minus/plus pair. When a goal is set, the goal gauge runs the full card height down the right edge, inset 16px top, right and bottom. A failed save shows "Not saved. The count was put back." in Fail Red, semibold.
 
 ### Drum Register (signature)
 One tile per digit, minimum four digits, zero-padded, a minus sign gets its own tile. Only changed tiles roll (180ms ease-out, from 40% above with fade). Digits are hidden from assistive tech; a status span announces the value.
 
-### Flow Indicator (signature)
-Idle in Ink Muted, reached in Meter Blue. On the change that reaches the goal it spins 720 degrees once over 1100ms. Under reduced motion it stays still.
+### Goal Gauge (signature)
+A narrow measuring glass: open top with a lip, a brim line at 94% of its height marking the goal, and short marks at a quarter, half and three quarters of the goal. Water is Meter Blue at 85% with a solid 2px meniscus, and its height is count ÷ goal, from empty at zero or below up to the brim at the goal. Past the goal the water tops up to the rim. Water changes height over 180ms ease-out on each tap; the glass, lip and marks go from Ink Muted to Meter Blue when the goal is reached. Reaching the goal (the water hitting the brim) is the only celebration. Under reduced motion the level jumps. It is a `meter` for assistive tech, labelled "N of GOAL", with ", goal reached" added once reached.
 
 ### Navigation
 Meter Blue header plate with the condensed wordmark, a theme toggle (sun/moon) and a menu icon, all white. The menu is a native modal dialog: an 20rem right-side Porcelain panel with a hairline left border, 18px items, items highlight to the page color on hover.
@@ -219,7 +219,7 @@ Porcelain, Ink text, 2px Ink Muted outline, 2px corners, no shadow.
 - **Do** use outlined controls that fill with Ink on press, minimum 48px.
 - **Do** set names, labels and buttons in Barlow Condensed uppercase and messages in Barlow.
 - **Do** keep surfaces flat with 2px corners and hairline borders.
-- **Do** limit motion to the 180ms digit roll, color transitions on press, and the single 1100ms flow-indicator spin; render everything static under reduced motion.
+- **Do** limit motion to the 180ms digit roll, the 180ms gauge level change, and color transitions; render everything static under reduced motion.
 
 ### Don't:
 - **Don't** use shadows, gradients, mascots, or the neon dark look of the earlier theme.
