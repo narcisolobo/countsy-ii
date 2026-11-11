@@ -19,25 +19,23 @@ function ArchiveCounter({ counter }: ArchiveCounterProps) {
   return (
     <Fragment>
       {!counter.is_archived ? (
-        <div className="tooltip" data-tip="archive counter">
-          <button
-            aria-label="Archive counter"
-            onClick={() => showArchiveModal()}
-            className="btn btn-circle btn-ghost text-base-content/70 hover:text-base-content"
-          >
-            <Archive size={28} />
-          </button>
-        </div>
+        <button
+          aria-label="Archive counter"
+          title="Archive counter"
+          onClick={() => showArchiveModal()}
+          className="ui-btn-icon"
+        >
+          <Archive size={28} />
+        </button>
       ) : (
-        <div className="tooltip" data-tip="restore counter">
-          <button
-            aria-label="Restore counter"
-            onClick={() => archive.mutate(false)}
-            className="btn btn-circle btn-ghost text-base-content/70 hover:text-base-content"
-          >
-            <ArchiveRestore size={28} />
-          </button>
-        </div>
+        <button
+          aria-label="Restore counter"
+          title="Restore counter"
+          onClick={() => archive.mutate(false)}
+          className="ui-btn-icon"
+        >
+          <ArchiveRestore size={28} />
+        </button>
       )}
     </Fragment>
   );

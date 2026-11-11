@@ -43,7 +43,7 @@ function InlineTitleEdit({ counter, initialTitle }: InlineTitleEditProps) {
   }, [isEditing]);
 
   return (
-    <div className="border-base-content/10 flex justify-center border-b px-4 py-2">
+    <div className="border-line flex justify-center border-b px-4 py-2">
       {isEditing ? (
         <input
           ref={inputRef}
@@ -52,17 +52,16 @@ function InlineTitleEdit({ counter, initialTitle }: InlineTitleEditProps) {
           onChange={(e) => setDraftTitle(e.target.value)}
           onBlur={() => handleBlur()}
           onKeyDown={(e) => handleKeyDown(e)}
-          className="input w-full font-semibold"
+          className="ui-input font-semibold"
         />
       ) : (
-        <div className="tooltip" data-tip="Edit title">
-          <h3
-            className="card-title cursor-pointer"
-            onClick={() => setIsEditing(true)}
-          >
-            {initialTitle}
-          </h3>
-        </div>
+        <h3
+          className="cursor-pointer text-lg font-semibold"
+          title="Edit title"
+          onClick={() => setIsEditing(true)}
+        >
+          {initialTitle}
+        </h3>
       )}
     </div>
   );

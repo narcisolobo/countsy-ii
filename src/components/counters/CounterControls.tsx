@@ -18,24 +18,24 @@ function CounterControls({
 
   return (
     <div className="mt-4 flex justify-center gap-4">
-      <div className="tooltip" data-tip="decrement">
-        <button
-          className="btn btn-circle btn-ghost"
-          onClick={() => onDecrement(value)}
-          disabled={updateCounterValue.isPending}
-        >
-          <Minus />
-        </button>
-      </div>
-      <div className="tooltip" data-tip="increment">
-        <button
-          className="btn btn-circle btn-ghost"
-          onClick={() => onIncrement(value)}
-          disabled={updateCounterValue.isPending}
-        >
-          <Plus />
-        </button>
-      </div>
+      <button
+        className="ui-btn-icon"
+        aria-label="Decrement"
+        title="Decrement"
+        onClick={() => onDecrement(value)}
+        disabled={updateCounterValue.isPending}
+      >
+        <Minus />
+      </button>
+      <button
+        className="ui-btn-icon"
+        aria-label="Increment"
+        title="Increment"
+        onClick={() => onIncrement(value)}
+        disabled={updateCounterValue.isPending}
+      >
+        <Plus />
+      </button>
     </div>
   );
 }

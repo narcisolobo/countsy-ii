@@ -3,16 +3,16 @@ import Crow from "@/assets/countsy-crow.png";
 
 function Hero() {
   return (
-    <section className="bg-base-200 py-8" id="top">
+    <section className="bg-page py-8" id="top">
       <div className="container mx-auto">
-        <div className="hero min-h-[70vh]">
-          <div className="hero-content flex-col lg:flex-row">
-            <div
-              className="tooltip"
-              data-tip="Image by Mohamed Hassan from Pixabay"
-            >
-              <img src={Crow} alt="Countsy Crow" className="max-w-xs" />
-            </div>
+        <div className="flex min-h-[70vh] items-center justify-center">
+          <div className="flex flex-col items-center gap-8 lg:flex-row">
+            <img
+              src={Crow}
+              alt="Countsy Crow"
+              title="Image by Mohamed Hassan from Pixabay"
+              className="max-w-xs"
+            />
             <div>
               <h1 className="font-display text-4xl font-semibold">
                 Track Anything, Count Everything
@@ -21,7 +21,7 @@ function Hero() {
                 Create and manage custom counters for habits, projects, or
                 anything else.
               </p>
-              <Link to="/sign-in" className="btn btn-primary">
+              <Link to="/sign-in" className="ui-btn ui-btn-primary">
                 Start Counting
               </Link>
             </div>

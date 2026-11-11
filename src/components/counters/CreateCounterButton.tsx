@@ -8,7 +8,10 @@ function CreateCounterButton({ filteredCountersLength }: CounterButtonProps) {
   const createCounter = useCreateCounter(filteredCountersLength);
 
   return (
-    <button className="btn btn-primary" onClick={() => createCounter.mutate()}>
+    <button
+      className="ui-btn ui-btn-primary"
+      onClick={() => createCounter.mutate()}
+    >
       + Create Counter
     </button>
   );

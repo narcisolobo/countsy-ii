@@ -37,7 +37,7 @@ function CountersPage() {
 
   if (isError) {
     return (
-      <div className="text-error p-4 text-center">
+      <div className="text-danger p-4 text-center">
         Something went wrong while loading your counters.
       </div>
     );
@@ -49,12 +49,12 @@ function CountersPage() {
   });
 
   return (
-    <section id="counters" className="bg-base-200 text-center">
+    <section id="counters" className="bg-page text-center">
       <div className="container mx-auto min-h-[70vh] px-4 py-12">
         <h1 className="mb-6 text-3xl font-bold">Your Counters</h1>
         <div className="mb-4 flex justify-end gap-4">
           <button
-            className="btn btn-outline"
+            className="ui-btn"
             onClick={() => setShowArchived((prev) => !prev)}
           >
             {showArchived ? "Hide Archived" : "Show Archived"}

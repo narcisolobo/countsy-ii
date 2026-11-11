@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Archive, ArrowBigLeftDash, Save } from "lucide-react";
+import { Archive, ArrowBigLeftDash, Loader2, Save } from "lucide-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -107,7 +107,7 @@ function EditCounterPage() {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-base-200 mx-auto flex max-w-2xl flex-col gap-4 rounded-lg p-6 shadow-md"
+        className="bg-surface border-line mx-auto flex max-w-2xl flex-col gap-4 rounded-lg border p-6"
       >
         <FormInput
           type="text"
@@ -136,38 +136,33 @@ function EditCounterPage() {
           valueAsNumber
         />
         <div className="mt-4 flex justify-end gap-2">
-          <div className="tooltip" data-tip="Back">
-            <Link
-              to="/counters"
-              className="btn hover:btn-warning flex items-center gap-2"
-            >
-              <ArrowBigLeftDash />
-            </Link>
-          </div>
-          <div className="tooltip" data-tip="Archive counter">
-            <button
-              className="btn hover:btn-error"
-              type="button"
-              aria-label="Archive counter"
-              disabled={!!counter.is_archived}
-              onClick={showArchiveModal}
-            >
-              <Archive />
-            </button>
-          </div>
-          <div className="tooltip" data-tip="Save changes">
-            <button
-              className="btn btn-primary"
-              type="submit"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <span className="loading loading-spinner loading-sm"></span>
-              ) : (
-                <Save />
-              )}
-            </button>
-          </div>
+          <Link
+            to="/counters"
+            aria-label="Back"
+            title="Back"
+            className="ui-btn"
+          >
+            <ArrowBigLeftDash />
+          </Link>
+          <button
+            className="ui-btn hover:text-danger"
+            type="button"
+            aria-label="Archive counter"
+            title="Archive counter"
+            disabled={!!counter.is_archived}
+            onClick={showArchiveModal}
+          >
+            <Archive />
+          </button>
+          <button
+            className="ui-btn ui-btn-primary"
+            type="submit"
+            aria-label="Save changes"
+            title="Save changes"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? <Loader2 className="animate-spin" /> : <Save />}
+          </button>
         </div>
       </form>
       <ArchiveModal

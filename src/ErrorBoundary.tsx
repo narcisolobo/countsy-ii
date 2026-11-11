@@ -32,10 +32,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       return (
         fallback ?? (
           <div className="flex min-h-screen flex-col items-center justify-center p-6 text-center">
-            <h1 className="text-error mb-4 text-2xl font-bold">
+            <h1 className="text-danger mb-4 text-2xl font-bold">
               Something went wrong.
             </h1>
-            <p className="text-base-content/70 text-base">
+            <p className="text-ink-muted text-base">
               {error?.message || "Please refresh the page or try again later."}
             </p>
           </div>

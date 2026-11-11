@@ -9,10 +9,10 @@ function EmptyCounterCard({ filteredCountersLength }: EmptyCounterCardProps) {
 
   return (
     <div
-      className="card bg-base-100 border-base-content/50 hover:border-base-content text-base-content/50 hover:text-base-content min-h-56 cursor-pointer items-center justify-center border-4 border-dashed shadow-md"
+      className="bg-surface border-line text-ink-muted hover:border-ink hover:text-ink flex min-h-56 cursor-pointer items-center justify-center rounded-lg border-4 border-dashed"
       onClick={() => createCounter.mutate()}
     >
-      <h3 className="card-title">Add New Counter</h3>
+      <h3 className="text-lg font-semibold">Add New Counter</h3>
     </div>
   );
 }

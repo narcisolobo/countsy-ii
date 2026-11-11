@@ -1,17 +1,61 @@
 @import "tailwindcss";
-@plugin "daisyui" {
-  themes:
-    cupcake --default,
-    synthwave;
-}
 
 /* fonts */
 @import "@fontsource-variable/inter/wght.css";
 @import "@fontsource-variable/fraunces/wght.css";
 @import "@fontsource-variable/space-grotesk/wght.css";
 
+/*
+ * Interim color tokens. Light is the default; dark follows the OS unless the
+ * user picks a theme (html[data-theme]). Values are placeholders until the
+ * redesign sets the real palette.
+ */
+:root {
+  color-scheme: light;
+  --page: #f4f2ee;
+  --surface: #ffffff;
+  --ink: #1d1d1b;
+  --ink-muted: #5c5a55;
+  --line: #d9d6cf;
+  --accent: #2f5d50;
+  --accent-ink: #ffffff;
+  --danger: #b3261e;
+  --ok: #2e6b3a;
+  --warn: #8a5a00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #161614;
+    --surface: #211f1c;
+    --ink: #ecebe6;
+    --ink-muted: #a8a59d;
+    --line: #3a3833;
+    --accent: #7fb5a3;
+    --accent-ink: #10201b;
+    --danger: #f2877f;
+    --ok: #86c795;
+    --warn: #e0b34f;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #161614;
+  --surface: #211f1c;
+  --ink: #ecebe6;
+  --ink-muted: #a8a59d;
+  --line: #3a3833;
+  --accent: #7fb5a3;
+  --accent-ink: #10201b;
+  --danger: #f2877f;
+  --ok: #86c795;
+  --warn: #e0b34f;
+}
+
 /* customizations */
-@theme {
+@theme inline {
   --font-sans:
     "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -19,4 +63,43 @@
   --font-display:
     "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-danger: var(--danger);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+}
+
+@layer base {
+  body {
+    background-color: var(--page);
+    color: var(--ink);
+  }
+}
+
+@layer components {
+  .ui-btn {
+    @apply border-line bg-surface text-ink hover:bg-page focus-visible:outline-accent inline-flex cursor-pointer items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .ui-btn-primary {
+    @apply border-accent bg-accent text-accent-ink hover:bg-accent/90;
+  }
+  .ui-btn-warn {
+    @apply border-warn bg-warn text-page hover:bg-warn/90;
+  }
+  .ui-btn-icon {
+    @apply text-ink-muted hover:bg-line/50 hover:text-ink focus-visible:outline-accent inline-flex size-12 cursor-pointer items-center justify-center rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .ui-input {
+    @apply border-line bg-surface text-ink focus-visible:outline-accent w-full rounded-md border px-3 py-2 focus-visible:outline-2 focus-visible:outline-offset-1;
+  }
+  .ui-link {
+    @apply text-accent underline underline-offset-2 hover:no-underline;
+  }
 }

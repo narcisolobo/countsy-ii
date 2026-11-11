@@ -10,19 +10,19 @@ function FormInput({
   valueAsNumber,
 }: FormInputProps) {
   return (
-    <div className="form-control">
-      <label className="label" htmlFor={name}>
-        <span className="label-text capitalize">{label}:</span>
+    <div className="flex flex-col gap-1">
+      <label className="text-sm font-medium" htmlFor={name}>
+        <span className="capitalize">{label}:</span>
       </label>
       <input
         id={name}
-        className="input w-full"
+        className="ui-input"
         type={type}
         required
         placeholder={placeholder}
         {...register(name, valueAsNumber ? { valueAsNumber: true } : {})}
       />
-      <div className="validator-hint">
+      <div className="text-ink-muted text-sm">
         {error?.message ? error.message : placeholder}
       </div>
     </div>

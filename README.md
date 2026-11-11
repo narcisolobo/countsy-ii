@@ -30,7 +30,7 @@ A counter is the first example in every React tutorial. I wanted to see how far 
 | App          | React 19, TypeScript, Vite, React Router                                           |
 | Data         | TanStack Query for fetching, caching and optimistic updates                        |
 | Forms        | React Hook Form with Zod schemas                                                   |
-| UI           | Tailwind CSS 4, DaisyUI, Lucide icons, react-hot-toast                             |
+| UI           | Tailwind CSS 4, Lucide icons, react-hot-toast                             |
 | Backend      | Supabase (Postgres with row level security, Auth with PKCE flow)                   |
 | Hosting      | Vercel                                                                             |
 

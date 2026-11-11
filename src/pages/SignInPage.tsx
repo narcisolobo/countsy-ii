@@ -43,42 +43,46 @@ function SignInPage() {
   }
 
   return (
-    <div className="bg-base-200 flex min-h-[70vh] items-center justify-center p-4">
+    <div className="bg-page flex min-h-[70vh] items-center justify-center p-4">
       <div className="flex max-w-sm flex-col">
-        <div className="card bg-base-100 shadow-lg">
-          <div className="card-body">
+        <div className="bg-surface border-line rounded-lg border">
+          <div className="p-6">
             <h1 className="text-center text-2xl font-semibold">
               Sign in to Countsy
             </h1>
             <form onSubmit={handleSignIn} className="mt-4 space-y-4">
-              <div className="form-control">
-                <label className="label" htmlFor="email">
-                  <span className="label-text">Email</span>
+              <div className="flex flex-col gap-1">
+                <label className="text-sm font-medium" htmlFor="email">
+                  <span>Email</span>
                 </label>
                 <input
                   id="email"
                   type="email"
                   required
-                  className="input input-bordered w-full"
+                  className="ui-input"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <button
                 type="submit"
-                className={`btn btn-primary w-full ${loading ? "btn-disabled" : ""}`}
+                className="ui-btn ui-btn-primary w-full"
+                disabled={loading}
               >
                 {loading ? "Sending..." : "Send Magic Link"}
               </button>
               {message && (
-                <div className="text-success mt-2 text-center text-sm">
+                <div className="text-ok mt-2 text-center text-sm">
                   {message}
                 </div>
               )}
             </form>
           </div>
         </div>
-        <div className="divider">OR</div>
+        <div className="text-ink-muted my-4 flex items-center gap-3 text-sm">
+          <span className="bg-line h-px flex-1"></span>OR
+          <span className="bg-line h-px flex-1"></span>
+        </div>
         <button
           className={styles["gsi-material-button"]}
           onClick={handleSignInWithGoogle}

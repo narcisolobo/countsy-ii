@@ -19,7 +19,7 @@ Radical simplicity: named counters, one-tap increment/decrement, an optional goa
 Sign in with a magic link sent by email or with Google (PKCE flow). Counters live in Supabase Postgres with row level security, so each user reads and changes only their own. Increments update optimistically and roll back if the save fails. Users can rename a counter inline or on an edit page, archive counters, hide archived ones, and restore them. A theme switcher is available.
 
 ## Capabilities and Constraints
-- Stack is existing and in place: React 19, TypeScript, Vite, React Router, TanStack Query, React Hook Form with Zod, Tailwind CSS 4, DaisyUI, Lucide icons, react-hot-toast, Supabase, hosted on Vercel.
+- Stack is existing and in place: React 19, TypeScript, Vite, React Router, TanStack Query, React Hook Form with Zod, Tailwind CSS 4, Lucide icons, react-hot-toast, Supabase, hosted on Vercel.
 - Landing page is being reduced to a bare sign-in screen: a little more than one line of plain copy saying what the app does and how to use it, with no selling. Routes: landing, sign-in, auth callback, counters, edit counter, terms, privacy.
 - Terminology: "counter", "goal", "archive".
 - No ads, social, or gamification features exist; none are planned.

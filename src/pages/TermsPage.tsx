@@ -2,11 +2,11 @@ import { Link } from "react-router";
 
 function TermsPage() {
   return (
-    <section id="terms" className="bg-base-200 min-h-[70vh]">
+    <section id="terms" className="bg-page min-h-[70vh]">
       <div className="container mx-auto">
         <div className="px-4 py-12">
           <h1 className="mb-4 text-3xl font-bold">Terms of Service</h1>
-          <p className="text-base-content/70 mb-8 text-sm">
+          <p className="text-ink-muted mb-8 text-sm">
             Effective Date: April 29, 2025
           </p>
           <p className="mb-4">
@@ -63,7 +63,7 @@ function TermsPage() {
           <h2 className="mt-6 mb-2 text-xl font-semibold">6. Privacy</h2>
           <p className="mb-4">
             We respect your privacy. Please see our{" "}
-            <Link to="/privacy" className="link">
+            <Link to="/privacy" className="ui-link">
               Privacy Policy
             </Link>{" "}
             for information on how we handle your data.
@@ -88,7 +88,7 @@ function TermsPage() {
           <h2 className="mt-6 mb-2 text-xl font-semibold">9. Contact</h2>
           <p className="mb-4">
             For any questions, please contact:{" "}
-            <a href="mailto:support@cisocodes.com" className="link">
+            <a href="mailto:support@cisocodes.com" className="ui-link">
               support@cisocodes.com
             </a>
           </p>

@@ -12,7 +12,7 @@ function CounterList({ filteredCounters }: CounterListProps) {
   if (filteredCounters?.length === 0) {
     return (
       <Fragment>
-        <p className="text-base-content/70 mb-4">
+        <p className="text-ink-muted mb-4">
           You don't have any counters yet. Let's fix that!
         </p>
         <CreateCounterButton filteredCountersLength={0} />

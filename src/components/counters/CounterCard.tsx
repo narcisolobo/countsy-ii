@@ -14,14 +14,14 @@ function CounterCard({ counter }: CounterCardProps) {
   const updateCounterValue = useUpdateCounterValue(counter.id);
 
   return (
-    <div className="card bg-base-100 border-base-200 border shadow-md">
+    <div className="bg-surface border-line rounded-lg border">
       {/* card header */}
       <InlineTitleEdit counter={counter} initialTitle={counter.title} />
 
       <div className="flex gap-2">
-        <div className="border-base-content/10 flex-2 border-r p-4">
+        <div className="border-line flex-2 border-r p-4">
           {/* counter value */}
-          <p className="text-base-content/70">
+          <p className="text-ink-muted">
             <span className="text-8xl">{counter.value}</span>
           </p>
           {/* decrement/increment buttons */}
@@ -37,7 +37,7 @@ function CounterCard({ counter }: CounterCardProps) {
           />
         </div>
         <div className="flex h-full flex-1 flex-col justify-center p-4">
-          <p className="text-base-content/70">
+          <p className="text-ink-muted">
             Goal: {counter.goal !== null ? counter.goal : `n/a`}
           </p>
           <EditButton id={counter.id} />

@@ -3,7 +3,7 @@ import { Link } from "react-router";
 function Footer() {
   return (
     <section id="footer">
-      <footer className="footer footer-horizontal footer-center text-base-content mx-auto max-w-5xl p-10">
+      <footer className="text-ink mx-auto max-w-5xl p-10 text-center">
         <aside>
           <p className="font-semibold">
             Countsy
@@ -13,8 +13,8 @@ function Footer() {
           <p>© {new Date().getFullYear()} Narciso Lobo. All rights reserved.</p>
         </aside>
 
-        <nav>
-          <div className="grid grid-flow-col gap-4">
+        <nav className="mt-4">
+          <div className="flex items-center justify-center gap-4">
             <a
               href="https://github.com/narcisolobo/countsy-ii"
               aria-label="GitHub"
