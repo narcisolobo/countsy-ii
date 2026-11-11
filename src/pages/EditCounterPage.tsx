@@ -138,6 +138,7 @@ function EditCounterPage() {
           label="goal"
           register={register}
           error={errors.goal}
+          required={false}
           valueAsNumber
         />
         <div className="mt-4 flex flex-wrap gap-3">

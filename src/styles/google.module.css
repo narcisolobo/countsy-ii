@@ -1,3 +1,8 @@
+.gsi-material-button:focus-visible {
+  outline: 3px solid #1f5f8b;
+  outline-offset: 2px;
+}
+
 .gsi-material-button {
   -moz-user-select: none;
   -webkit-user-select: none;

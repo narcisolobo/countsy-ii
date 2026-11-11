@@ -15,7 +15,7 @@ function ArchiveModal({
   return (
     <dialog
       id={`archive-modal-${id}`}
-      className="bg-surface text-ink border-line m-auto w-full max-w-md rounded-sm border-2 p-0 backdrop:bg-black/50"
+      className="bg-surface text-ink border-line m-auto w-[calc(100%-2rem)] max-w-md rounded-sm border-2 p-0 backdrop:bg-black/50"
     >
       <div className="p-6">
         <h3 className="ui-label text-xl">Archive this counter?</h3>

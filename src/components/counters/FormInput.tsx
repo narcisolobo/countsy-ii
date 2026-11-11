@@ -8,6 +8,7 @@ function FormInput({
   register,
   error,
   valueAsNumber,
+  required = true,
 }: FormInputProps) {
   return (
     <div className="flex flex-col gap-1">
@@ -20,9 +21,17 @@ function FormInput({
         aria-invalid={error ? true : undefined}
         aria-describedby={`${name}-hint`}
         type={type}
-        required
+        required={required}
         placeholder={placeholder}
-        {...register(name, valueAsNumber ? { valueAsNumber: true } : {})}
+        {...register(
+          name,
+          valueAsNumber
+            ? {
+                setValueAs: (v: string | number | null) =>
+                  v === "" || v === null ? null : Number(v),
+              }
+            : {},
+        )}
       />
       <div
         id={`${name}-hint`}

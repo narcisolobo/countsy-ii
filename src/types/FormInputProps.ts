@@ -9,4 +9,5 @@ export type FormInputProps = {
   register: UseFormRegister<CounterFormValues>;
   error: FieldError | undefined;
   valueAsNumber?: boolean;
+  required?: boolean;
 };

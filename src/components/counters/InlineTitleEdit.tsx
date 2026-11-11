@@ -56,7 +56,7 @@ function InlineTitleEdit({ counter, initialTitle }: InlineTitleEditProps) {
           className="ui-input font-label !min-h-10 text-xl font-semibold tracking-wider uppercase"
         />
       ) : (
-        <h3 className="min-w-0">
+        <h2 className="min-w-0">
           <button
             type="button"
             title="Rename"
@@ -65,7 +65,7 @@ function InlineTitleEdit({ counter, initialTitle }: InlineTitleEditProps) {
           >
             {initialTitle}
           </button>
-        </h3>
+        </h2>
       )}
     </div>
   );

@@ -94,16 +94,16 @@
 @layer components {
   /* Plain outlined controls. */
   .ui-btn {
-    @apply border-ink font-label text-ink hover:bg-ink hover:text-page focus-visible:outline-accent disabled:hover:text-ink inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-sm border-2 bg-transparent px-5 py-2 text-lg font-semibold tracking-wider uppercase transition-colors focus-visible:outline-3 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent;
+    @apply border-ink font-label text-ink hover:bg-ink hover:text-page active:bg-ink active:text-page focus-visible:outline-accent disabled:hover:text-ink inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-sm border-2 bg-transparent px-5 py-2 text-lg font-semibold tracking-wider uppercase transition-colors focus-visible:outline-3 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent;
   }
   .ui-btn-primary {
-    @apply border-accent text-accent hover:bg-accent hover:text-page disabled:hover:text-accent;
+    @apply border-accent text-accent hover:bg-accent hover:text-page active:bg-accent active:text-page disabled:hover:text-accent;
   }
   .ui-btn-icon {
     @apply text-ink-muted hover:text-ink focus-visible:outline-accent inline-flex size-12 cursor-pointer items-center justify-center rounded-sm transition-colors focus-visible:outline-3 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
   }
   .ui-input {
-    @apply border-line bg-surface text-ink focus-visible:border-accent focus-visible:outline-accent min-h-12 w-full rounded-sm border-2 px-3 py-2 text-lg focus-visible:outline-3 focus-visible:outline-offset-1;
+    @apply border-ink-muted placeholder:text-ink-muted bg-surface text-ink focus-visible:border-accent focus-visible:outline-accent min-h-12 w-full rounded-sm border-2 px-3 py-2 text-lg focus-visible:outline-3 focus-visible:outline-offset-1;
   }
   .ui-label {
     @apply font-label text-accent text-base font-semibold tracking-wider uppercase;
@@ -139,4 +139,24 @@
   to {
     transform: rotate(720deg);
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+  }
+}
+
+/* react-hot-toast, restyled with the palette. */
+.toast-meter {
+  background: var(--surface) !important;
+  color: var(--ink) !important;
+  border: 2px solid var(--ink-muted);
+  border-radius: 2px !important;
+  font-weight: 500;
+  box-shadow: none !important;
 }

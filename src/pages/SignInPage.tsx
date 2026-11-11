@@ -95,7 +95,7 @@ function SignInPage() {
           <div className={styles["gsi-material-button-state"]}></div>
           <div className={styles["gsi-material-button-content-wrapper"]}>
             <div className={styles["gsi-material-button-icon"]}>
-              <img src={GoogleLogo} alt="Sign in with Google" />
+              <img src={GoogleLogo} alt="" />
             </div>
             <span className={styles["gsi-material-button-contents"]}>
               Sign in with Google

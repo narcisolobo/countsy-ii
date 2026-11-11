@@ -1,6 +1,7 @@
 import { X as XIcon } from "lucide-react";
-import { useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router";
+import { DrawerContext } from "@/context/DrawerContext";
 import { type DrawerItem } from "@/types/drawer-item";
 
 interface DrawerProps {
@@ -8,64 +9,66 @@ interface DrawerProps {
   items: DrawerItem[];
 }
 
+/** Side menu on a native modal dialog: focus trap, Esc and focus return come free. */
 function Drawer({ children, items }: DrawerProps) {
-  const checkboxRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  function closeDrawer() {
-    if (checkboxRef.current) {
-      checkboxRef.current.checked = false;
-    }
-  }
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (isOpen && !dialog.open) dialog.showModal();
+    if (!isOpen && dialog.open) dialog.close();
+  }, [isOpen]);
 
   return (
-    <div className="relative min-h-screen overflow-x-clip">
-      <input
-        type="checkbox"
-        className="peer sr-only"
+    <DrawerContext.Provider value={{ isOpen, open: () => setIsOpen(true) }}>
+      {children}
+      <dialog
+        ref={dialogRef}
+        aria-label="Menu"
         id="user-menu"
-        ref={checkboxRef}
-      />
-      <div>{children}</div>
-      <label
-        htmlFor="user-menu"
-        aria-label="Close user menu"
-        className="pointer-events-none fixed inset-0 z-40 bg-black/40 opacity-0 transition-opacity peer-checked:pointer-events-auto peer-checked:opacity-100"
-      ></label>
-      <ul className="bg-surface text-ink border-line invisible fixed inset-y-0 right-0 z-50 flex w-80 max-w-full translate-x-full flex-col gap-1 border-l p-4 transition-transform peer-checked:visible peer-checked:translate-x-0">
-        <li className="ml-auto">
-          <label
-            htmlFor="user-menu"
-            aria-label="Close user menu"
-            className="ui-btn-icon size-10"
+        onClose={() => setIsOpen(false)}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setIsOpen(false);
+        }}
+        className="bg-surface text-ink border-line fixed inset-y-0 right-0 m-0 ml-auto h-dvh max-h-none w-80 max-w-full border-l p-0 backdrop:bg-black/40"
+      >
+        <nav className="flex flex-col gap-1 p-4">
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={() => setIsOpen(false)}
+            className="ui-btn-icon ml-auto size-10"
           >
             <XIcon />
-          </label>
-        </li>
-        {items.map((item, idx) => (
-          <li key={idx}>
-            {item.href ? (
+          </button>
+          {items.map((item, idx) =>
+            item.href ? (
               <Link
+                key={idx}
                 to={item.href}
-                onClick={closeDrawer}
-                className="hover:bg-page block rounded-md px-3 py-2"
+                onClick={() => setIsOpen(false)}
+                className="hover:bg-page block rounded-sm px-3 py-3 text-lg"
               >
                 {item.label}
               </Link>
             ) : (
               <button
+                key={idx}
                 onClick={() => {
-                  closeDrawer();
+                  setIsOpen(false);
                   item.onClick?.();
                 }}
-                className="hover:bg-page block w-full cursor-pointer rounded-md px-3 py-2 text-left"
+                className="hover:bg-page block w-full cursor-pointer rounded-sm px-3 py-3 text-left text-lg"
               >
                 {item.label}
               </button>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
+            ),
+          )}
+        </nav>
+      </dialog>
+    </DrawerContext.Provider>
   );
 }
 

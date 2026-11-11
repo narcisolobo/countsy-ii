@@ -46,8 +46,18 @@ function CounterCard({ counter }: CounterCardProps) {
             />
           )}
         </div>
+        {updateCounterValue.isError && (
+          <p role="alert" className="text-fail mt-2 font-semibold">
+            Not saved. The count was put back.
+          </p>
+        )}
         <p className="font-label text-ink-muted mt-2 h-6 text-lg tracking-wider uppercase">
-          {hasGoal && <>of {counter.goal}</>}
+          {hasGoal && (
+            <>
+              of {counter.goal}
+              {reached && <span className="font-semibold"> · reached</span>}
+            </>
+          )}
           {counter.is_archived && (
             <span className={`font-semibold ${hasGoal ? "ml-3" : ""}`}>
               Archived
@@ -55,7 +65,6 @@ function CounterCard({ counter }: CounterCardProps) {
           )}
         </p>
         <CounterControls
-          id={counter.id}
           onDecrement={() => updateCounterValue.mutate(value - 1)}
           onIncrement={() => updateCounterValue.mutate(value + 1)}
         />

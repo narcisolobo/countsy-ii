@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes, useNavigate } from "react-router";
 import Drawer from "@/components/Drawer";
 import Footer from "@/components/Footer";
@@ -31,6 +32,13 @@ function App() {
 
   return (
     <Drawer items={isSignedIn ? drawerItemsSignedIn : drawerItemsSignedOut}>
+      <Toaster
+        position="bottom-center"
+        toastOptions={{
+          duration: 4000,
+          className: "toast-meter",
+        }}
+      />
       <Header />
       <main>
         <Routes>

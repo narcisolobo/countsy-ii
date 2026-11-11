@@ -1,8 +1,10 @@
 import { CircleUserRound } from "lucide-react";
 import { Link } from "react-router";
+import { useDrawer } from "@/hooks/useDrawer";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 function Header() {
+  const { isOpen, open } = useDrawer();
   return (
     <header className="bg-plate text-plate-ink">
       <nav className="mx-auto flex max-w-5xl items-center gap-2 px-4 py-2">
@@ -13,15 +15,17 @@ function Header() {
           Countsy
         </Link>
         <ThemeSwitcher />
-        <label
-          htmlFor="user-menu"
+        <button
+          type="button"
           aria-label="Open menu"
-          tabIndex={0}
-          role="button"
+          aria-haspopup="dialog"
+          aria-expanded={isOpen}
+          aria-controls="user-menu"
+          onClick={open}
           className="ui-btn-icon text-plate-ink hover:text-plate-ink focus-visible:outline-white"
         >
           <CircleUserRound size={32} />
-        </label>
+        </button>
       </nav>
     </header>
   );
