@@ -39,7 +39,7 @@ Name "Countsy" and the tagline "Track anything. Count everything." are incumbent
 - Data is private by default; each user sees only their own counters.
 
 ## Redesign Intent
-Complete visual redesign with light and dark modes. Primary task on the counters screen: read the number fast. Anti-goals: cute or playful, trendy-minimal SaaS polish, cold corporate dashboards, decorative motion, with two exceptions: motion that confirms an action (number changes, button presses, save/rollback feedback) is fine, and one celebratory Lottie animation is allowed when a counter reaches its goal. That is the only ornamental animation permitted. DaisyUI and Tailwind are not binding.
+Complete visual redesign with light and dark modes. Primary task on the counters screen: read the number fast. Anti-goals: cute or playful, trendy-minimal SaaS polish, cold corporate dashboards, decorative motion, with two exceptions: motion that confirms an action (number changes, button presses, save/rollback feedback) is fine, and one celebratory animation is allowed when a counter reaches its goal, and it should belong to the visual world (not a stock effect). That is the only ornamental animation permitted. DaisyUI and Tailwind are not binding.
 
 ## Accessibility & Inclusion
 WCAG AA is a hard requirement.
