@@ -95,9 +95,9 @@
         "purpose": "Changed digit tiles slide in from 40% above."
       },
       {
-        "name": "meter-spin",
-        "value": "1100ms cubic-bezier(0.25,0.1,0.2,1) x1, 720deg",
-        "purpose": "Flow indicator spin on reaching a goal."
+        "name": "gauge-level",
+        "value": "180ms ease-out (height)",
+        "purpose": "Goal gauge water level on each count change; reaching the brim is the goal celebration."
       },
       {
         "name": "press",
@@ -166,12 +166,12 @@
       "css": ".ds-card{background:var(--surface,#f8fafb);border:1px solid var(--line,#b9c3ca);border-radius:2px;padding:12px 16px}.ds-card-title{font:600 20px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--accent,#1f5f8b)}.ds-goal{margin-top:8px;font:600 18px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted,#46515a)}"
     },
     {
-      "name": "Flow Indicator",
+      "name": "Goal Gauge",
       "kind": "custom",
       "refersTo": "counter-card",
-      "description": "Star-wheel dial that spins once on goal reached.",
-      "html": "<svg class=\"ds-flow\" viewBox=\"0 0 40 40\" width=\"40\" height=\"40\"><circle cx=\"20\" cy=\"20\" r=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><g stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\"><line x1=\"20\" y1=\"6\" x2=\"20\" y2=\"34\"/><line x1=\"20\" y1=\"6\" x2=\"20\" y2=\"34\" transform=\"rotate(60 20 20)\"/><line x1=\"20\" y1=\"6\" x2=\"20\" y2=\"34\" transform=\"rotate(120 20 20)\"/><circle cx=\"20\" cy=\"20\" r=\"3\" fill=\"currentColor\" stroke=\"none\"/></g></svg>",
-      "css": ".ds-flow{color:var(--accent,#1f5f8b)}"
+      "description": "Narrow open-topped glass down the card's right edge; water fills to a brim line at the goal and tops up past it.",
+      "html": "<div class=\"ds-gauge\" role=\"meter\" aria-valuemin=\"0\" aria-valuemax=\"8\" aria-valuenow=\"7\" aria-label=\"7 of 8\"><div class=\"ds-gauge-water\" style=\"height:82%\"></div><div class=\"ds-gauge-lip\"></div><div class=\"ds-gauge-brim\"></div></div>",
+      "css": ".ds-gauge{position:relative;width:14px;height:160px;border:2px solid var(--ink-muted,#46515a);border-top:0;border-radius:0 0 3px 3px}.ds-gauge-water{position:absolute;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--accent,#1f5f8b) 85%,transparent);border-top:2px solid var(--accent,#1f5f8b);transition:height 180ms ease-out}.ds-gauge-lip{position:absolute;top:-1px;left:-2px;right:-6px;height:2px;background:var(--ink-muted,#46515a)}.ds-gauge-brim{position:absolute;right:0;bottom:94%;width:50%;height:2px;background:var(--ink-muted,#46515a)}"
     }
   ],
   "narrative": {
@@ -183,7 +183,7 @@
       "Outlined, square-ish controls that fill with ink on press.",
       "Numbers as uniform drum digits, never colored per digit.",
       "Red appears only as a failed-save state.",
-      "Motion is action feedback plus one flow-indicator spin."
+      "Motion is action feedback only; reaching a goal is the gauge filling to its brim."
     ],
     "rules": [
       {
@@ -218,7 +218,7 @@
       "**Do** use outlined controls that fill with Ink on press, minimum 48px.",
       "**Do** set names, labels and buttons in Barlow Condensed uppercase and messages in Barlow.",
       "**Do** keep surfaces flat with 2px corners and hairline borders.",
-      "**Do** limit motion to the 180ms digit roll, color transitions on press, and the single 1100ms flow-indicator spin; render everything static under reduced motion."
+      "**Do** limit motion to the 180ms digit roll, the 180ms gauge level change, and color transitions; render everything static under reduced motion."
     ],
     "donts": [
       "**Don't** use shadows, gradients, mascots, or the neon dark look of the earlier theme.",

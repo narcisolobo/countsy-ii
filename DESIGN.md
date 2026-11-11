@@ -179,7 +179,7 @@ Flat. There are no shadows; the toast explicitly removes its shadow. Depth comes
 
 ## Shapes
 
-Barely-rounded plates: 2px corners on cards, buttons, inputs, drawer items and toasts, with 2px outlines on controls and 1px on cards. Drum tiles are 0.7em wide by 1.3em tall with a 0.06em corner and a 1px mid-line seam at 15% tile-ink, set with 3px gaps. The goal gauge is a 14px open-topped glass with 2px sides and a 3px rounded bottom. The favicon is still the old circled three-spoke star-wheel in white on a meter-blue 6px-rounded square.
+Barely-rounded plates: 2px corners on cards, buttons, inputs, drawer items and toasts, with 2px outlines on controls and 1px on cards. Drum tiles are 0.7em wide by 1.3em tall with a 0.06em corner and a 1px mid-line seam at 15% tile-ink, set with 3px gaps. The goal gauge is a 14px open-topped glass with 2px sides and a 3px rounded bottom. The favicon repeats the glass, two-thirds full, in white on a meter-blue 6px-rounded square.
 
 ## Components
 
