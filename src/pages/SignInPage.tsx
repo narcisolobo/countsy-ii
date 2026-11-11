@@ -43,42 +43,51 @@ function SignInPage() {
   }
 
   return (
-    <div className="bg-base-200 flex min-h-[70vh] items-center justify-center p-4">
-      <div className="flex max-w-sm flex-col">
-        <div className="card bg-base-100 shadow-lg">
-          <div className="card-body">
-            <h1 className="text-center text-2xl font-semibold">
-              Sign in to Countsy
+    <div className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-8">
+      <div className="flex flex-col">
+        <div>
+          <div>
+            <h1 className="font-label text-3xl font-bold tracking-wider uppercase">
+              Countsy
             </h1>
-            <form onSubmit={handleSignIn} className="mt-4 space-y-4">
-              <div className="form-control">
-                <label className="label" htmlFor="email">
-                  <span className="label-text">Email</span>
+            <p className="text-ink-muted mt-2">
+              Countsy keeps a running count of anything you want to track.
+              Create a counter, tap plus or minus as the number changes, and set
+              a goal if you want one.
+            </p>
+            <form onSubmit={handleSignIn} className="mt-6 space-y-4">
+              <div className="flex flex-col gap-1">
+                <label className="ui-label" htmlFor="email">
+                  <span>Email</span>
                 </label>
                 <input
                   id="email"
                   type="email"
                   required
-                  className="input input-bordered w-full"
+                  className="ui-input"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <button
                 type="submit"
-                className={`btn btn-primary w-full ${loading ? "btn-disabled" : ""}`}
+                className="ui-btn ui-btn-primary w-full"
+                disabled={loading}
               >
-                {loading ? "Sending..." : "Send Magic Link"}
+                {loading ? "Sending..." : "Email me a sign-in link"}
               </button>
               {message && (
-                <div className="text-success mt-2 text-center text-sm">
+                <div role="status" className="text-ink font-semibold">
                   {message}
                 </div>
               )}
             </form>
           </div>
         </div>
-        <div className="divider">OR</div>
+        <div className="text-ink-muted my-4 flex items-center gap-3 text-sm">
+          <span className="bg-line h-px flex-1"></span>OR
+          <span className="bg-line h-px flex-1"></span>
+        </div>
         <button
           className={styles["gsi-material-button"]}
           onClick={handleSignInWithGoogle}
@@ -86,7 +95,7 @@ function SignInPage() {
           <div className={styles["gsi-material-button-state"]}></div>
           <div className={styles["gsi-material-button-content-wrapper"]}>
             <div className={styles["gsi-material-button-icon"]}>
-              <img src={GoogleLogo} alt="Sign in with Google" />
+              <img src={GoogleLogo} alt="" />
             </div>
             <span className={styles["gsi-material-button-contents"]}>
               Sign in with Google

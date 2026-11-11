@@ -7,14 +7,14 @@ interface EditButtonProps {
 
 function EditButton({ id }: EditButtonProps) {
   return (
-    <div className="tooltip" data-tip="edit counter">
-      <Link
-        to={`/counters/${id}/edit`}
-        className="btn btn-circle btn-ghost text-base-content/70 hover:text-base-content"
-      >
-        <PencilLine size={28} />
-      </Link>
-    </div>
+    <Link
+      to={`/counters/${id}/edit`}
+      aria-label="Edit counter"
+      title="Edit counter"
+      className="ui-btn-icon"
+    >
+      <PencilLine size={22} />
+    </Link>
   );
 }
 

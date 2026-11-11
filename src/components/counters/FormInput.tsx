@@ -8,23 +8,40 @@ function FormInput({
   register,
   error,
   valueAsNumber,
+  required = true,
 }: FormInputProps) {
   return (
-    <div className="form-control">
-      <label className="label" htmlFor={name}>
-        <span className="label-text capitalize">{label}:</span>
+    <div className="flex flex-col gap-1">
+      <label className="ui-label" htmlFor={name}>
+        <span>{label}</span>
       </label>
       <input
         id={name}
-        className="input w-full"
+        className="ui-input"
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? `${name}-hint` : undefined}
         type={type}
-        required
+        required={required}
         placeholder={placeholder}
-        {...register(name, valueAsNumber ? { valueAsNumber: true } : {})}
+        {...register(
+          name,
+          valueAsNumber
+            ? {
+                setValueAs: (v: string | number | null) =>
+                  v === "" || v === null ? null : Number(v),
+              }
+            : {},
+        )}
       />
-      <div className="validator-hint">
-        {error?.message ? error.message : placeholder}
-      </div>
+      {error?.message && (
+        <div
+          id={`${name}-hint`}
+          role="alert"
+          className="text-ink font-semibold"
+        >
+          {error.message}
+        </div>
+      )}
     </div>
   );
 }

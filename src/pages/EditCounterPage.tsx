@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Archive, ArrowBigLeftDash, Save } from "lucide-react";
-import { useEffect } from "react";
+import { Archive, ArrowBigLeftDash, Loader2, Save } from "lucide-react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate, useParams } from "react-router";
@@ -41,7 +40,6 @@ function EditCounterPage() {
     formState: { errors, isSubmitting },
     handleSubmit,
     register,
-    reset,
   } = useForm<CounterFormValues>({
     resolver: zodResolver(counterSchema),
     defaultValues: {
@@ -49,17 +47,16 @@ function EditCounterPage() {
       goal: undefined,
       value: undefined,
     },
+    // Synced from the loaded counter; unlike reset-in-an-effect this also
+    // fills the form when the data is already cached on first render.
+    values: counter
+      ? {
+          title: counter.title ?? "",
+          goal: counter.goal ?? undefined,
+          value: counter.value ?? 0,
+        }
+      : undefined,
   });
-
-  useEffect(() => {
-    if (counter) {
-      reset({
-        title: counter.title ?? "",
-        goal: counter.goal ?? undefined,
-        value: counter.value ?? undefined,
-      });
-    }
-  }, [counter, reset]);
 
   const onSubmit = async (data: CounterFormValues) => {
     if (!id) return;
@@ -102,12 +99,17 @@ function EditCounterPage() {
   }
 
   return (
-    <section id="edit-form" className="mx-auto min-h-[70vh] max-w-5xl p-4">
-      <h1 className="mb-6 text-center text-3xl font-bold">Edit Counter</h1>
+    <section
+      id="edit-form"
+      className="mx-auto min-h-[70vh] max-w-5xl px-4 py-6"
+    >
+      <h1 className="font-label mb-6 text-3xl font-bold tracking-wider uppercase">
+        Edit counter
+      </h1>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-base-200 mx-auto flex max-w-2xl flex-col gap-4 rounded-lg p-6 shadow-md"
+        className="bg-surface border-line flex max-w-xl flex-col gap-4 rounded-sm border p-4 sm:p-6"
       >
         <FormInput
           type="text"
@@ -128,46 +130,34 @@ function EditCounterPage() {
         />
         <FormInput
           type="number"
-          placeholder="Enter goal (optional)"
+          placeholder="Enter goal"
           name="goal"
-          label="goal"
+          label="goal (optional)"
           register={register}
           error={errors.goal}
+          required={false}
           valueAsNumber
         />
-        <div className="mt-4 flex justify-end gap-2">
-          <div className="tooltip" data-tip="Back">
-            <Link
-              to="/counters"
-              className="btn hover:btn-warning flex items-center gap-2"
-            >
-              <ArrowBigLeftDash />
-            </Link>
-          </div>
-          <div className="tooltip" data-tip="Archive counter">
-            <button
-              className="btn hover:btn-error"
-              type="button"
-              aria-label="Archive counter"
-              disabled={!!counter.is_archived}
-              onClick={showArchiveModal}
-            >
-              <Archive />
-            </button>
-          </div>
-          <div className="tooltip" data-tip="Save changes">
-            <button
-              className="btn btn-primary"
-              type="submit"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <span className="loading loading-spinner loading-sm"></span>
-              ) : (
-                <Save />
-              )}
-            </button>
-          </div>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Link to="/counters" className="ui-btn">
+            <ArrowBigLeftDash /> Back
+          </Link>
+          <button
+            className="ui-btn"
+            type="button"
+            disabled={!!counter.is_archived}
+            onClick={showArchiveModal}
+          >
+            <Archive /> Archive
+          </button>
+          <button
+            className="ui-btn ui-btn-primary"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? <Loader2 className="animate-spin" /> : <Save />}{" "}
+            Save
+          </button>
         </div>
       </form>
       <ArchiveModal

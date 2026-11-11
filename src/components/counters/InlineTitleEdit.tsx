@@ -43,26 +43,29 @@ function InlineTitleEdit({ counter, initialTitle }: InlineTitleEditProps) {
   }, [isEditing]);
 
   return (
-    <div className="border-base-content/10 flex justify-center border-b px-4 py-2">
+    <div className="flex h-[4.25rem] min-w-0 flex-1 items-center">
       {isEditing ? (
         <input
           ref={inputRef}
           type="text"
+          aria-label="Counter title"
           value={draftTitle}
           onChange={(e) => setDraftTitle(e.target.value)}
           onBlur={() => handleBlur()}
           onKeyDown={(e) => handleKeyDown(e)}
-          className="input w-full font-semibold"
+          className="ui-input font-label !min-h-10 text-xl font-semibold tracking-wider uppercase"
         />
       ) : (
-        <div className="tooltip" data-tip="Edit title">
-          <h3
-            className="card-title cursor-pointer"
+        <h2 className="min-w-0">
+          <button
+            type="button"
+            title={`Rename ${initialTitle}`}
             onClick={() => setIsEditing(true)}
+            className="ui-label line-clamp-2 max-w-full cursor-pointer text-left text-xl leading-tight break-words"
           >
             {initialTitle}
-          </h3>
-        </div>
+          </button>
+        </h2>
       )}
     </div>
   );

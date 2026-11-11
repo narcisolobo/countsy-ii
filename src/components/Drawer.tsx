@@ -1,6 +1,7 @@
 import { X as XIcon } from "lucide-react";
-import { useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router";
+import { DrawerContext } from "@/context/DrawerContext";
 import { type DrawerItem } from "@/types/drawer-item";
 
 interface DrawerProps {
@@ -8,54 +9,66 @@ interface DrawerProps {
   items: DrawerItem[];
 }
 
+/** Side menu on a native modal dialog: focus trap, Esc and focus return come free. */
 function Drawer({ children, items }: DrawerProps) {
-  const checkboxRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  function closeDrawer() {
-    if (checkboxRef.current) {
-      checkboxRef.current.checked = false;
-    }
-  }
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (isOpen && !dialog.open) dialog.showModal();
+    if (!isOpen && dialog.open) dialog.close();
+  }, [isOpen]);
 
   return (
-    <div className="drawer drawer-end">
-      <input
-        type="checkbox"
-        className="drawer-toggle"
+    <DrawerContext.Provider value={{ isOpen, open: () => setIsOpen(true) }}>
+      {children}
+      <dialog
+        ref={dialogRef}
+        aria-label="Menu"
         id="user-menu"
-        ref={checkboxRef}
-      />
-      <div className="drawer-content">{children}</div>
-      <div className="drawer-side">
-        <label
-          htmlFor="user-menu"
-          aria-label="Close user menu"
-          className="drawer-overlay"
-        ></label>
-        <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-          <li className="ml-auto">
-            <label
-              htmlFor="user-menu"
-              aria-label="Close user menu"
-              className="btn btn-ghost btn-sm rounded-full"
-            >
-              <XIcon />
-            </label>
-          </li>
-          {items.map((item, idx) => (
-            <li key={idx}>
-              {item.href ? (
-                <Link to={item.href} onClick={closeDrawer}>
-                  {item.label}
-                </Link>
-              ) : (
-                <button onClick={item.onClick}>{item.label}</button>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+        onClose={() => setIsOpen(false)}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setIsOpen(false);
+        }}
+        className="bg-surface text-ink border-line fixed inset-y-0 right-0 m-0 ml-auto h-dvh max-h-none w-80 max-w-full border-l p-0 backdrop:bg-black/40"
+      >
+        <nav className="flex flex-col gap-1 p-4">
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={() => setIsOpen(false)}
+            className="ui-btn-icon ml-auto size-10"
+          >
+            <XIcon />
+          </button>
+          {items.map((item, idx) =>
+            item.href ? (
+              <Link
+                key={idx}
+                to={item.href}
+                onClick={() => setIsOpen(false)}
+                className="hover:bg-page block rounded-sm px-3 py-3 text-lg"
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <button
+                key={idx}
+                onClick={() => {
+                  setIsOpen(false);
+                  item.onClick?.();
+                }}
+                className="hover:bg-page block w-full cursor-pointer rounded-sm px-3 py-3 text-left text-lg"
+              >
+                {item.label}
+              </button>
+            ),
+          )}
+        </nav>
+      </dialog>
+    </DrawerContext.Provider>
   );
 }
 

@@ -1,41 +1,27 @@
 import { Minus, Plus } from "lucide-react";
-import { useUpdateCounterValue } from "@/hooks/useUpdateCounterValue";
 
 interface CounterControlsProps {
-  id: string;
-  value: number;
-  onDecrement: (value: number) => void;
-  onIncrement: (value: number) => void;
+  onDecrement: () => void;
+  onIncrement: () => void;
 }
 
-function CounterControls({
-  id,
-  value,
-  onDecrement,
-  onIncrement,
-}: CounterControlsProps) {
-  const updateCounterValue = useUpdateCounterValue(id);
-
+function CounterControls({ onDecrement, onIncrement }: CounterControlsProps) {
   return (
-    <div className="mt-4 flex justify-center gap-4">
-      <div className="tooltip" data-tip="decrement">
-        <button
-          className="btn btn-circle btn-ghost"
-          onClick={() => onDecrement(value)}
-          disabled={updateCounterValue.isPending}
-        >
-          <Minus />
-        </button>
-      </div>
-      <div className="tooltip" data-tip="increment">
-        <button
-          className="btn btn-circle btn-ghost"
-          onClick={() => onIncrement(value)}
-          disabled={updateCounterValue.isPending}
-        >
-          <Plus />
-        </button>
-      </div>
+    <div className="mt-2 grid grid-cols-2 gap-3">
+      <button
+        className="ui-btn min-h-[50px]"
+        aria-label="Decrement"
+        onClick={onDecrement}
+      >
+        <Minus />
+      </button>
+      <button
+        className="ui-btn min-h-[50px]"
+        aria-label="Increment"
+        onClick={onIncrement}
+      >
+        <Plus />
+      </button>
     </div>
   );
 }

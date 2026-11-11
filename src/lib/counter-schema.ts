@@ -10,8 +10,7 @@ const counterSchema = z.object({
     .optional(),
   value: z
     .number({ error: "Value must be a number" })
-    .int("Value must be a whole number")
-    .nonnegative("Value cannot be negative"),
+    .int("Value must be a whole number"),
 });
 
 export type CounterFormValues = z.infer<typeof counterSchema>;

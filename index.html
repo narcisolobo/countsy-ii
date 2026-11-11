@@ -4,20 +4,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Countsy — Track Anything, Count Everything</title>
+    <title>Countsy: Simple counters</title>
     <meta
       name="description"
-      content="Countsy is a lightweight web app for creating and managing custom counters — habits, goals, inventory, and more."
+      content="A set of counters for anything you want to keep a running count of. Add a goal, tap plus or minus, and your number is saved."
     />
 
     <!-- Open Graph (social previews: Slack, Twitter/X, LinkedIn, etc.) -->
-    <meta
-      property="og:title"
-      content="Countsy — Track Anything, Count Everything"
-    />
+    <meta property="og:title" content="Countsy: Simple counters" />
     <meta
       property="og:description"
-      content="Create and manage custom counters for habits, projects, inventory, and goals."
+      content="A set of counters for anything you want to keep a running count of. Add a goal, tap plus or minus, and your number is saved."
     />
     <meta
       property="og:image"
@@ -28,10 +25,10 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Countsy" />
+    <meta name="twitter:title" content="Countsy: Simple counters" />
     <meta
       name="twitter:description"
-      content="Track anything. Count everything."
+      content="A set of counters for anything you want to keep a running count of. Add a goal, tap plus or minus, and your number is saved."
     />
     <meta
       name="twitter:image"
@@ -42,6 +39,13 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark")
+          document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
