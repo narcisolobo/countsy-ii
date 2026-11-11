@@ -12,7 +12,7 @@ function CreateCounterButton({ filteredCountersLength }: CounterButtonProps) {
       className="ui-btn ui-btn-primary"
       onClick={() => createCounter.mutate()}
     >
-      + Create Counter
+      New counter
     </button>
   );
 }

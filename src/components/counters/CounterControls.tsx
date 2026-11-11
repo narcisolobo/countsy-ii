@@ -3,35 +3,31 @@ import { useUpdateCounterValue } from "@/hooks/useUpdateCounterValue";
 
 interface CounterControlsProps {
   id: string;
-  value: number;
-  onDecrement: (value: number) => void;
-  onIncrement: (value: number) => void;
+  onDecrement: () => void;
+  onIncrement: () => void;
 }
 
 function CounterControls({
   id,
-  value,
   onDecrement,
   onIncrement,
 }: CounterControlsProps) {
   const updateCounterValue = useUpdateCounterValue(id);
 
   return (
-    <div className="mt-4 flex justify-center gap-4">
+    <div className="mt-2 grid grid-cols-2 gap-3">
       <button
-        className="ui-btn-icon"
+        className="ui-btn min-h-[50px]"
         aria-label="Decrement"
-        title="Decrement"
-        onClick={() => onDecrement(value)}
+        onClick={onDecrement}
         disabled={updateCounterValue.isPending}
       >
         <Minus />
       </button>
       <button
-        className="ui-btn-icon"
+        className="ui-btn min-h-[50px]"
         aria-label="Increment"
-        title="Increment"
-        onClick={() => onIncrement(value)}
+        onClick={onIncrement}
         disabled={updateCounterValue.isPending}
       >
         <Plus />

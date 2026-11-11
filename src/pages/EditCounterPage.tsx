@@ -102,12 +102,17 @@ function EditCounterPage() {
   }
 
   return (
-    <section id="edit-form" className="mx-auto min-h-[70vh] max-w-5xl p-4">
-      <h1 className="mb-6 text-center text-3xl font-bold">Edit Counter</h1>
+    <section
+      id="edit-form"
+      className="mx-auto min-h-[70vh] max-w-5xl px-4 py-6"
+    >
+      <h1 className="font-label mb-6 text-3xl font-bold tracking-wider uppercase">
+        Edit counter
+      </h1>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-surface border-line mx-auto flex max-w-2xl flex-col gap-4 rounded-lg border p-6"
+        className="bg-surface border-line flex max-w-xl flex-col gap-4 rounded-sm border p-4 sm:p-6"
       >
         <FormInput
           type="text"
@@ -135,33 +140,25 @@ function EditCounterPage() {
           error={errors.goal}
           valueAsNumber
         />
-        <div className="mt-4 flex justify-end gap-2">
-          <Link
-            to="/counters"
-            aria-label="Back"
-            title="Back"
-            className="ui-btn"
-          >
-            <ArrowBigLeftDash />
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Link to="/counters" className="ui-btn">
+            <ArrowBigLeftDash /> Back
           </Link>
           <button
-            className="ui-btn hover:text-danger"
+            className="ui-btn"
             type="button"
-            aria-label="Archive counter"
-            title="Archive counter"
             disabled={!!counter.is_archived}
             onClick={showArchiveModal}
           >
-            <Archive />
+            <Archive /> Archive
           </button>
           <button
             className="ui-btn ui-btn-primary"
             type="submit"
-            aria-label="Save changes"
-            title="Save changes"
             disabled={isSubmitting}
           >
-            {isSubmitting ? <Loader2 className="animate-spin" /> : <Save />}
+            {isSubmitting ? <Loader2 className="animate-spin" /> : <Save />}{" "}
+            Save
           </button>
         </div>
       </form>

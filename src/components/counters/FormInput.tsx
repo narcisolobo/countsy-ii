@@ -11,18 +11,23 @@ function FormInput({
 }: FormInputProps) {
   return (
     <div className="flex flex-col gap-1">
-      <label className="text-sm font-medium" htmlFor={name}>
-        <span className="capitalize">{label}:</span>
+      <label className="ui-label" htmlFor={name}>
+        <span>{label}</span>
       </label>
       <input
         id={name}
         className="ui-input"
+        aria-invalid={error ? true : undefined}
+        aria-describedby={`${name}-hint`}
         type={type}
         required
         placeholder={placeholder}
         {...register(name, valueAsNumber ? { valueAsNumber: true } : {})}
       />
-      <div className="text-ink-muted text-sm">
+      <div
+        id={`${name}-hint`}
+        className={error ? "text-ink font-semibold" : "text-ink-muted text-sm"}
+      >
         {error?.message ? error.message : placeholder}
       </div>
     </div>

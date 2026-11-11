@@ -33,7 +33,7 @@ function ThemeSwitcher() {
         theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
       }
       title={theme === "dark" ? "Light theme" : "Dark theme"}
-      className="ui-btn-icon size-12"
+      className="ui-btn-icon text-plate-ink hover:text-plate-ink focus-visible:outline-white"
     >
       {theme === "dark" ? <Sun size={28} /> : <Moon size={28} />}
     </button>

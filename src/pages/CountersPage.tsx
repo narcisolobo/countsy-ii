@@ -1,11 +1,11 @@
 import CounterList from "@/components/counters/CounterList";
+import CreateCounterButton from "@/components/counters/CreateCounterButton";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/lib/supabase-client";
 import type { Counter } from "@/types/counter";
-import CreateCounterButton from "@/components/counters/CreateCounterButton";
 
 function CountersPage() {
   const [showArchived, setShowArchived] = useState(false);
@@ -31,40 +31,43 @@ function CountersPage() {
     enabled: !!user && !isLoading,
   });
 
-  if (isPending || !counters) {
-    return <LoadingSpinner />;
-  }
-
   if (isError) {
     return (
-      <div className="text-danger p-4 text-center">
+      <div role="alert" className="text-fail p-4 text-center font-semibold">
         Something went wrong while loading your counters.
       </div>
     );
   }
 
-  const filteredCounters = counters?.filter((counter) => {
+  if (isPending || !counters) {
+    return <LoadingSpinner />;
+  }
+
+  const filteredCounters = counters.filter((counter) => {
     if (showArchived) return true;
     return !counter.is_archived;
   });
 
   return (
-    <section id="counters" className="bg-page text-center">
-      <div className="container mx-auto min-h-[70vh] px-4 py-12">
-        <h1 className="mb-6 text-3xl font-bold">Your Counters</h1>
-        <div className="mb-4 flex justify-end gap-4">
+    <section id="counters" className="mx-auto max-w-5xl px-4 py-6">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <h1 className="font-label text-3xl font-bold tracking-wider uppercase">
+          Counters
+        </h1>
+        <div className="flex gap-3">
           <button
             className="ui-btn"
+            aria-pressed={showArchived}
             onClick={() => setShowArchived((prev) => !prev)}
           >
-            {showArchived ? "Hide Archived" : "Show Archived"}
+            {showArchived ? "Hide archived" : "Show archived"}
           </button>
           <CreateCounterButton
-            filteredCountersLength={filteredCounters.length || 0}
+            filteredCountersLength={filteredCounters.length}
           />
         </div>
-        <CounterList filteredCounters={filteredCounters} />
       </div>
+      <CounterList filteredCounters={filteredCounters} />
     </section>
   );
 }

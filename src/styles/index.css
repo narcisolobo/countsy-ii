@@ -1,68 +1,72 @@
 @import "tailwindcss";
 
 /* fonts */
-@import "@fontsource-variable/inter/wght.css";
-@import "@fontsource-variable/fraunces/wght.css";
-@import "@fontsource-variable/space-grotesk/wght.css";
+@import "@fontsource/barlow/400.css";
+@import "@fontsource/barlow/500.css";
+@import "@fontsource/barlow/600.css";
+@import "@fontsource/barlow-condensed/500.css";
+@import "@fontsource/barlow-condensed/600.css";
+@import "@fontsource/barlow-condensed/700.css";
 
 /*
- * Interim color tokens. Light is the default; dark follows the OS unless the
- * user picks a theme (html[data-theme]). Values are placeholders until the
- * redesign sets the real palette.
+ * Water-meter register palette. Light is the default; dark follows the OS
+ * unless the user picks a theme (html[data-theme]).
+ * --fail is for a failed save only, never decoration.
  */
 :root {
   color-scheme: light;
-  --page: #f4f2ee;
-  --surface: #ffffff;
-  --ink: #1d1d1b;
-  --ink-muted: #5c5a55;
-  --line: #d9d6cf;
-  --accent: #2f5d50;
-  --accent-ink: #ffffff;
-  --danger: #b3261e;
-  --ok: #2e6b3a;
-  --warn: #8a5a00;
+  --page: #eceff1;
+  --surface: #f8fafb;
+  --ink: #14181c;
+  --ink-muted: #46515a;
+  --line: #b9c3ca;
+  --accent: #1f5f8b;
+  --plate: #1f5f8b;
+  --plate-ink: #ffffff;
+  --tile: #0d1114;
+  --tile-ink: #eceff1;
+  --fail: #b3261e;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --page: #161614;
-    --surface: #211f1c;
-    --ink: #ecebe6;
-    --ink-muted: #a8a59d;
-    --line: #3a3833;
-    --accent: #7fb5a3;
-    --accent-ink: #10201b;
-    --danger: #f2877f;
-    --ok: #86c795;
-    --warn: #e0b34f;
+    --page: #101418;
+    --surface: #171c21;
+    --ink: #e6ebef;
+    --ink-muted: #9aa7b1;
+    --line: #2f3a43;
+    --accent: #73b4e0;
+    --plate: #1a4d70;
+    --plate-ink: #ffffff;
+    --tile: #e6ebef;
+    --tile-ink: #101418;
+    --fail: #ff8f86;
   }
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --page: #161614;
-  --surface: #211f1c;
-  --ink: #ecebe6;
-  --ink-muted: #a8a59d;
-  --line: #3a3833;
-  --accent: #7fb5a3;
-  --accent-ink: #10201b;
-  --danger: #f2877f;
-  --ok: #86c795;
-  --warn: #e0b34f;
+  --page: #101418;
+  --surface: #171c21;
+  --ink: #e6ebef;
+  --ink-muted: #9aa7b1;
+  --line: #2f3a43;
+  --accent: #73b4e0;
+  --plate: #1a4d70;
+  --plate-ink: #ffffff;
+  --tile: #e6ebef;
+  --tile-ink: #101418;
+  --fail: #ff8f86;
 }
 
-/* customizations */
 @theme inline {
   --font-sans:
-    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Barlow", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-  --font-display:
-    "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-label:
+    "Barlow Condensed", "Barlow", ui-sans-serif, system-ui, sans-serif;
 
   --color-page: var(--page);
   --color-surface: var(--surface);
@@ -70,13 +74,17 @@
   --color-ink-muted: var(--ink-muted);
   --color-line: var(--line);
   --color-accent: var(--accent);
-  --color-accent-ink: var(--accent-ink);
-  --color-danger: var(--danger);
-  --color-ok: var(--ok);
-  --color-warn: var(--warn);
+  --color-plate: var(--plate);
+  --color-plate-ink: var(--plate-ink);
+  --color-tile: var(--tile);
+  --color-tile-ink: var(--tile-ink);
+  --color-fail: var(--fail);
 }
 
 @layer base {
+  html {
+    font-family: var(--font-sans);
+  }
   body {
     background-color: var(--page);
     color: var(--ink);
@@ -84,22 +92,51 @@
 }
 
 @layer components {
+  /* Plain outlined controls. */
   .ui-btn {
-    @apply border-line bg-surface text-ink hover:bg-page focus-visible:outline-accent inline-flex cursor-pointer items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply border-ink font-label text-ink hover:bg-ink hover:text-page focus-visible:outline-accent disabled:hover:text-ink inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-sm border-2 bg-transparent px-5 py-2 text-lg font-semibold tracking-wider uppercase transition-colors focus-visible:outline-3 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent;
   }
   .ui-btn-primary {
-    @apply border-accent bg-accent text-accent-ink hover:bg-accent/90;
-  }
-  .ui-btn-warn {
-    @apply border-warn bg-warn text-page hover:bg-warn/90;
+    @apply border-accent text-accent hover:bg-accent hover:text-page disabled:hover:text-accent;
   }
   .ui-btn-icon {
-    @apply text-ink-muted hover:bg-line/50 hover:text-ink focus-visible:outline-accent inline-flex size-12 cursor-pointer items-center justify-center rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply text-ink-muted hover:text-ink focus-visible:outline-accent inline-flex size-12 cursor-pointer items-center justify-center rounded-sm transition-colors focus-visible:outline-3 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
   }
   .ui-input {
-    @apply border-line bg-surface text-ink focus-visible:outline-accent w-full rounded-md border px-3 py-2 focus-visible:outline-2 focus-visible:outline-offset-1;
+    @apply border-line bg-surface text-ink focus-visible:border-accent focus-visible:outline-accent min-h-12 w-full rounded-sm border-2 px-3 py-2 text-lg focus-visible:outline-3 focus-visible:outline-offset-1;
+  }
+  .ui-label {
+    @apply font-label text-accent text-base font-semibold tracking-wider uppercase;
   }
   .ui-link {
     @apply text-accent underline underline-offset-2 hover:no-underline;
+  }
+}
+
+/* Motion: action feedback only, plus the one goal-reached spin. */
+@media (prefers-reduced-motion: no-preference) {
+  .drum-roll {
+    animation: drum-roll 180ms ease-out;
+  }
+  .meter-spin {
+    animation: meter-spin 1100ms cubic-bezier(0.25, 0.1, 0.2, 1) 1;
+    transform-origin: 50% 50%;
+  }
+}
+
+@keyframes drum-roll {
+  from {
+    transform: translateY(-40%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes meter-spin {
+  to {
+    transform: rotate(720deg);
   }
 }

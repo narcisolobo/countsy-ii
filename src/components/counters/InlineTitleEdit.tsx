@@ -43,24 +43,28 @@ function InlineTitleEdit({ counter, initialTitle }: InlineTitleEditProps) {
   }, [isEditing]);
 
   return (
-    <div className="border-line flex justify-center border-b px-4 py-2">
+    <div className="min-w-0 flex-1 self-center py-2">
       {isEditing ? (
         <input
           ref={inputRef}
           type="text"
+          aria-label="Counter title"
           value={draftTitle}
           onChange={(e) => setDraftTitle(e.target.value)}
           onBlur={() => handleBlur()}
           onKeyDown={(e) => handleKeyDown(e)}
-          className="ui-input font-semibold"
+          className="ui-input font-label !min-h-10 text-xl font-semibold tracking-wider uppercase"
         />
       ) : (
-        <h3
-          className="cursor-pointer text-lg font-semibold"
-          title="Edit title"
-          onClick={() => setIsEditing(true)}
-        >
-          {initialTitle}
+        <h3 className="min-w-0">
+          <button
+            type="button"
+            title="Rename"
+            onClick={() => setIsEditing(true)}
+            className="ui-label block max-w-full cursor-pointer truncate text-left text-xl"
+          >
+            {initialTitle}
+          </button>
         </h3>
       )}
     </div>

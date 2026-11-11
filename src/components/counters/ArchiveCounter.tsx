@@ -25,7 +25,7 @@ function ArchiveCounter({ counter }: ArchiveCounterProps) {
           onClick={() => showArchiveModal()}
           className="ui-btn-icon"
         >
-          <Archive size={28} />
+          <Archive size={22} />
         </button>
       ) : (
         <button
@@ -34,7 +34,7 @@ function ArchiveCounter({ counter }: ArchiveCounterProps) {
           onClick={() => archive.mutate(false)}
           className="ui-btn-icon"
         >
-          <ArchiveRestore size={28} />
+          <ArchiveRestore size={22} />
         </button>
       )}
     </Fragment>

@@ -13,7 +13,7 @@ function EditButton({ id }: EditButtonProps) {
       title="Edit counter"
       className="ui-btn-icon"
     >
-      <PencilLine size={28} />
+      <PencilLine size={22} />
     </Link>
   );
 }

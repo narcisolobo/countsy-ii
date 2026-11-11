@@ -43,16 +43,21 @@ function SignInPage() {
   }
 
   return (
-    <div className="bg-page flex min-h-[70vh] items-center justify-center p-4">
-      <div className="flex max-w-sm flex-col">
-        <div className="bg-surface border-line rounded-lg border">
-          <div className="p-6">
-            <h1 className="text-center text-2xl font-semibold">
-              Sign in to Countsy
+    <div className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-8">
+      <div className="flex flex-col">
+        <div>
+          <div>
+            <h1 className="font-label text-3xl font-bold tracking-wider uppercase">
+              Countsy
             </h1>
-            <form onSubmit={handleSignIn} className="mt-4 space-y-4">
+            <p className="text-ink-muted mt-2">
+              Countsy keeps a running count of anything you want to track.
+              Create a counter, tap plus or minus as the number changes, and set
+              a goal if you want one.
+            </p>
+            <form onSubmit={handleSignIn} className="mt-6 space-y-4">
               <div className="flex flex-col gap-1">
-                <label className="text-sm font-medium" htmlFor="email">
+                <label className="ui-label" htmlFor="email">
                   <span>Email</span>
                 </label>
                 <input
@@ -69,10 +74,10 @@ function SignInPage() {
                 className="ui-btn ui-btn-primary w-full"
                 disabled={loading}
               >
-                {loading ? "Sending..." : "Send Magic Link"}
+                {loading ? "Sending..." : "Email me a sign-in link"}
               </button>
               {message && (
-                <div className="text-ok mt-2 text-center text-sm">
+                <div role="status" className="text-ink font-semibold">
                   {message}
                 </div>
               )}

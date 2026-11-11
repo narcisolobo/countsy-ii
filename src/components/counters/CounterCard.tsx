@@ -1,9 +1,12 @@
-import type { Counter } from "@/types/counter";
-import ArchiveModal from "./ArchiveModal";
-import EditButton from "./EditButton";
-import ArchiveCounter from "./ArchiveCounter";
-import CounterControls from "./CounterControls";
+import { useState } from "react";
 import { useUpdateCounterValue } from "@/hooks/useUpdateCounterValue";
+import type { Counter } from "@/types/counter";
+import ArchiveCounter from "./ArchiveCounter";
+import ArchiveModal from "./ArchiveModal";
+import CounterControls from "./CounterControls";
+import DrumRegister from "./DrumRegister";
+import EditButton from "./EditButton";
+import FlowIndicator from "./FlowIndicator";
 import InlineTitleEdit from "./InlineTitleEdit";
 
 interface CounterCardProps {
@@ -12,40 +15,53 @@ interface CounterCardProps {
 
 function CounterCard({ counter }: CounterCardProps) {
   const updateCounterValue = useUpdateCounterValue(counter.id);
+  const value = counter.value ?? 0;
+  const hasGoal = counter.goal !== null && counter.goal > 0;
+  const reached = hasGoal && value >= (counter.goal ?? 0);
+
+  // Spin the flow indicator once, only on the change that reaches the goal.
+  const [prevReached, setPrevReached] = useState(reached);
+  const [spinKey, setSpinKey] = useState(0);
+  if (reached !== prevReached) {
+    setPrevReached(reached);
+    if (reached) setSpinKey((k) => k + 1);
+  }
 
   return (
-    <div className="bg-surface border-line rounded-lg border">
-      {/* card header */}
-      <InlineTitleEdit counter={counter} initialTitle={counter.title} />
+    <article className="bg-surface border-line rounded-sm border">
+      <div className="flex items-start gap-1 pt-1 pr-1 pl-4">
+        <InlineTitleEdit counter={counter} initialTitle={counter.title} />
+        <EditButton id={counter.id} />
+        <ArchiveCounter counter={counter} />
+      </div>
 
-      <div className="flex gap-2">
-        <div className="border-line flex-2 border-r p-4">
-          {/* counter value */}
-          <p className="text-ink-muted">
-            <span className="text-8xl">{counter.value}</span>
-          </p>
-          {/* decrement/increment buttons */}
-          <CounterControls
-            id={counter.id}
-            value={(counter.value ?? 0) - 1}
-            onDecrement={() =>
-              updateCounterValue.mutate((counter.value ?? 0) - 1)
-            }
-            onIncrement={() =>
-              updateCounterValue.mutate((counter.value ?? 0) + 1)
-            }
-          />
+      <div className="px-4 pt-2 pb-4">
+        <div className="flex items-end justify-between gap-3">
+          <DrumRegister value={value} label={counter.title} />
+          {hasGoal && (
+            <FlowIndicator
+              key={spinKey}
+              reached={reached}
+              spinning={spinKey > 0}
+            />
+          )}
         </div>
-        <div className="flex h-full flex-1 flex-col justify-center p-4">
-          <p className="text-ink-muted">
-            Goal: {counter.goal !== null ? counter.goal : `n/a`}
-          </p>
-          <EditButton id={counter.id} />
-          <ArchiveCounter counter={counter} />
-        </div>
+        <p className="font-label text-ink-muted mt-2 h-6 text-lg tracking-wider uppercase">
+          {hasGoal && <>of {counter.goal}</>}
+          {counter.is_archived && (
+            <span className={`font-semibold ${hasGoal ? "ml-3" : ""}`}>
+              Archived
+            </span>
+          )}
+        </p>
+        <CounterControls
+          id={counter.id}
+          onDecrement={() => updateCounterValue.mutate(value - 1)}
+          onIncrement={() => updateCounterValue.mutate(value + 1)}
+        />
       </div>
       <ArchiveModal counter={counter} />
-    </div>
+    </article>
   );
 }
 

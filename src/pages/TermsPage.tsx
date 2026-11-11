@@ -3,9 +3,11 @@ import { Link } from "react-router";
 function TermsPage() {
   return (
     <section id="terms" className="bg-page min-h-[70vh]">
-      <div className="container mx-auto">
+      <div className="mx-auto max-w-2xl">
         <div className="px-4 py-12">
-          <h1 className="mb-4 text-3xl font-bold">Terms of Service</h1>
+          <h1 className="font-label mb-4 text-3xl font-bold tracking-wider uppercase">
+            Terms of Service
+          </h1>
           <p className="text-ink-muted mb-8 text-sm">
             Effective Date: April 29, 2025
           </p>
@@ -14,14 +16,12 @@ function TermsPage() {
             anything and track everything. By using our service, you agree to
             the following terms.
           </p>
-          <h2 className="mt-6 mb-2 text-xl font-semibold">
-            1. Acceptance of Terms
-          </h2>
+          <h2 className="ui-label mt-8 mb-2 text-xl">1. Acceptance of Terms</h2>
           <p className="mb-4">
             By accessing or using Countsy, you agree to be bound by these Terms
             of Service. If you do not agree, do not use the app.
           </p>
-          <h2 className="mt-6 mb-2 text-xl font-semibold">
+          <h2 className="ui-label mt-8 mb-2 text-xl">
             2. Description of Service
           </h2>
           <p className="mb-4">
@@ -29,7 +29,7 @@ function TermsPage() {
             system. Features may include user authentication, counter creation,
             editing, and archiving.
           </p>
-          <h2 className="mt-6 mb-2 text-xl font-semibold">3. User Accounts</h2>
+          <h2 className="ui-label mt-8 mb-2 text-xl">3. User Accounts</h2>
           <ul className="mb-4 list-inside list-disc">
             <li>
               You are responsible for maintaining the confidentiality of your
@@ -40,9 +40,7 @@ function TermsPage() {
               purpose.
             </li>
           </ul>
-          <h2 className="mt-6 mb-2 text-xl font-semibold">
-            4. Use of the Service
-          </h2>
+          <h2 className="ui-label mt-8 mb-2 text-xl">4. Use of the Service</h2>
           <ul className="mb-4 list-inside list-disc">
             <li>
               You agree not to misuse the service or interfere with its normal
@@ -53,14 +51,14 @@ function TermsPage() {
               terms.
             </li>
           </ul>
-          <h2 className="mt-6 mb-2 text-xl font-semibold">
+          <h2 className="ui-label mt-8 mb-2 text-xl">
             5. Intellectual Property
           </h2>
           <p className="mb-4">
             All branding, logos, and content are the property of Countsy or its
             licensors and may not be used without permission.
           </p>
-          <h2 className="mt-6 mb-2 text-xl font-semibold">6. Privacy</h2>
+          <h2 className="ui-label mt-8 mb-2 text-xl">6. Privacy</h2>
           <p className="mb-4">
             We respect your privacy. Please see our{" "}
             <Link to="/privacy" className="ui-link">
@@ -68,7 +66,7 @@ function TermsPage() {
             </Link>{" "}
             for information on how we handle your data.
           </p>
-          <h2 className="mt-6 mb-2 text-xl font-semibold">
+          <h2 className="ui-label mt-8 mb-2 text-xl">
             7. Disclaimers and Limitation of Liability
           </h2>
           <ul className="mb-4 list-inside list-disc">
@@ -78,14 +76,14 @@ function TermsPage() {
               service.
             </li>
           </ul>
-          <h2 className="mt-6 mb-2 text-xl font-semibold">
+          <h2 className="ui-label mt-8 mb-2 text-xl">
             8. Changes to the Terms
           </h2>
           <p className="mb-4">
             We may update these Terms occasionally. Changes will be posted on
             this page with an updated effective date.
           </p>
-          <h2 className="mt-6 mb-2 text-xl font-semibold">9. Contact</h2>
+          <h2 className="ui-label mt-8 mb-2 text-xl">9. Contact</h2>
           <p className="mb-4">
             For any questions, please contact:{" "}
             <a href="mailto:support@cisocodes.com" className="ui-link">
