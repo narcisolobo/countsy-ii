@@ -29,7 +29,7 @@ Name "Countsy" and the tagline "Track anything. Count everything." are incumbent
 
 ## Evidence on Hand
 - Live demo: https://countsy.cisocodes.com
-- `screenshot.png` at the repo root.
+- Screenshots of the counters page (light, dark and phone) in `docs/screenshots/`.
 - No testimonials, user counts, or metrics exist; do not fabricate them.
 
 ## Product Principles
