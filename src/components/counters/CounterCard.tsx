@@ -14,7 +14,7 @@ interface CounterCardProps {
 
 function CounterCard({ counter }: CounterCardProps) {
   const updateCounterValue = useUpdateCounterValue(counter.id);
-  const value = counter.value ?? 0;
+  const value = counter.value;
   const goal = counter.goal !== null && counter.goal > 0 ? counter.goal : null;
   const reached = goal !== null && value >= goal;
 

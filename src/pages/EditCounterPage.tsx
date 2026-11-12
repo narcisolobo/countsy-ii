@@ -53,7 +53,7 @@ function EditCounterPage() {
       ? {
           title: counter.title ?? "",
           goal: counter.goal ?? undefined,
-          value: counter.value ?? 0,
+          value: counter.value,
         }
       : undefined,
   });
