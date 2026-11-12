@@ -59,7 +59,7 @@ Accessibility 100, Best Practices 100, SEO 92. CLS is just over Google's 0.1 "go
 - **Preact via `preact/compat`.** Saves roughly 45–50 kB gzipped and needs almost no code changes. Rejected because React 19 features and the React Compiler may not work smoothly with it. It would also only make the framework smaller and leave Supabase, the largest dependency, untouched.
 - **React Router framework mode, with Supabase on the server.** The same server-side data approach as the chosen option, built on a router the app already uses. Estimated at 70–80 kB gzipped. A strong runner-up; React's runtime is the cost that remains.
 - **htmx or a fully server-rendered app.** Rejected because an increment must feel instant and roll back visibly if the save fails. That needs some state in the browser, which is awkward to build in htmx.
-- **SvelteKit with Supabase on the server (chosen).** Svelte compiles components to small JavaScript with no virtual DOM. Form actions with `use:enhance` handle saving (and still work before JavaScript loads), so React Query and react-hook-form become unnecessary. The built-in `tweened`, `spring` and transitions cover the number drum and the goal celebration. Estimated at 25–35 kB gzipped for the counters page.
+- **SvelteKit 3 (Svelte 5) with Supabase on the server (chosen).** Svelte compiles components to small JavaScript with no virtual DOM. Form actions with `use:enhance` handle saving (and still work before JavaScript loads), so React Query and react-hook-form become unnecessary. The built-in `Tween`, `Spring` and transitions cover the number drum and the goal celebration. Estimated at 25–35 kB gzipped for the counters page.
 
 ## Consequences
 
