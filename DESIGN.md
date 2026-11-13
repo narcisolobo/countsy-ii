@@ -133,7 +133,7 @@ components:
 
 A counter is a utility meter read at a glance. Countsy sets every value as a row of black drum tiles with light digits on a cool enamel-grey ground, under a single meter-blue plate. The system is flat, outlined and instrumental: nothing is decorated, and every surface exists to make the number legible first.
 
-Density is phone-first and calm. One card per counter, one number per card, a full-width minus and plus pair beneath. Dark mode is an instrument panel, not a recolor: the ground drops to near-black and the drum tiles invert to light tiles with dark digits.
+Density is phone-first and calm. One card per counter, one number per card, a minus and plus pair beneath. Dark mode is an instrument panel, not a recolor: the ground drops to near-black and the drum tiles invert to light tiles with dark digits.
 
 **Key Characteristics:**
 - Enamel-grey ground, one blue, near-black ink; no gradients, no shadows.
