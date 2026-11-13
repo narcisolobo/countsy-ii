@@ -1,5 +1,5 @@
 ---
-status: proposed
+status: accepted
 date: 2026-11-12
 ---
 
@@ -59,17 +59,34 @@ Accessibility 100, Best Practices 100, SEO 92. CLS is just over Google's 0.1 "go
 - **Preact via `preact/compat`.** Saves roughly 45–50 kB gzipped and needs almost no code changes. Rejected because React 19 features and the React Compiler may not work smoothly with it. It would also only make the framework smaller and leave Supabase, the largest dependency, untouched.
 - **React Router framework mode, with Supabase on the server.** The same server-side data approach as the chosen option, built on a router the app already uses. Estimated at 70–80 kB gzipped. A strong runner-up; React's runtime is the cost that remains.
 - **htmx or a fully server-rendered app.** Rejected because an increment must feel instant and roll back visibly if the save fails. That needs some state in the browser, which is awkward to build in htmx.
-- **SvelteKit with Supabase on the server (chosen).** Svelte compiles components to small JavaScript with no virtual DOM. Form actions with `use:enhance` handle saving (and still work before JavaScript loads), so React Query and react-hook-form become unnecessary. The built-in `tweened`, `spring` and transitions cover the number drum and the goal celebration. Estimated at 25–35 kB gzipped for the counters page.
+- **SvelteKit 3 (Svelte 5) with Supabase on the server (chosen).** Svelte compiles components to small JavaScript with no virtual DOM. Form actions with `use:enhance` handle saving (and still work before JavaScript loads), so React Query and react-hook-form become unnecessary. The built-in `Tween`, `Spring` and transitions cover the number drum and the goal celebration. Estimated at 25–35 kB gzipped for the counters page.
 
 ## Consequences
 
 - **Every increment goes through the server.** Requests go browser → Vercel function → Supabase instead of straight to Supabase. Optimistic updates hide the extra time, but a rollback shows up a little later. Put the Vercel function in the same region as the Supabase project.
-- **Row level security still applies.** The server creates its Supabase client from the user's session cookie, so queries run as that user. The policies don't change.
-- **The auth callback becomes a server endpoint.** It finishes the PKCE sign-in and sets the session cookie. Sessions move from localStorage to cookies, so everyone signs in once more after the switch.
-- **Deployment changes.** Delete `vercel.json`: its catch-all redirect to `/` would break server routes. Switch Vercel's framework preset to SvelteKit. Rename `VITE_SUPABASE_*` to `PUBLIC_SUPABASE_*`. Add the preview domains to Supabase's allowed redirect URLs.
-- **No database changes during the migration.** That keeps rollback simple: revert the merge commit and Vercel redeploys the React app.
+- **Row level security still applies.** The server creates its Supabase client from the user's session cookie, so queries run as that user.
+- **The auth callback becomes a server endpoint.** It finishes the PKCE sign-in and sets the session cookie. Sessions move from localStorage to cookies, so everyone signs in once more after the switch. Magic links use the `?code=` flow rather than `token_hash`, because new free-plan projects on Supabase's default email sender can't customize email templates.
+- **Deployment changes.** Replace `vercel.json`'s catch-all redirect to `/`, which would break server routes, with `"framework": "sveltekit-1"`. That setting overrides the dashboard's Vite preset, so the preset needs no manual switch at cutover. Rename `VITE_SUPABASE_*` to `PUBLIC_SUPABASE_*`. Add the preview domains to Supabase's allowed redirect URLs.
+- **The Svelte app gets a new Supabase project.** The original plan was to leave the database alone. Instead, the old `playground` project turned out to hold another app's leftover schema and a migration with no file behind it. So the Svelte app uses a new project, `countsy`, built only from `supabase/migrations/`, and the schema was tightened along the way (stricter constraints, a description column, delete only after archiving). `playground` keeps serving the React app untouched until cutover, so rollback is still "revert the merge commit". Counts are not migrated; the only user re-enters them by hand, and anything entered in the new app after cutover would not survive a rollback. Delete `playground` once the React app is gone.
 - **Less React work in the portfolio.** Countsy stops being a React app. This is a deliberate trade, and the measurements above are the reason for it.
 
 ## Results
 
-*To be filled in after the switch: JS sent per page, Lighthouse (mobile), and time until the counter list appears on throttled 4G, each compared with the baseline.*
+### JavaScript sent per page
+
+Measured on 2026-11-13 from a production build of `svelte-rewrite` (9bbb0b0). Each figure is the page's chunks and their static imports, plus what every page loads: the client entry and router, the root layout and the root error page. Sizes are gzipped at level 9.
+
+| Page | Gzipped | Minified | Change from 183 kB |
+| --- | --- | --- | --- |
+| `/` (sign-in) | 47 kB | 120 kB | −74% |
+| `/counters` | 52 kB | 132 kB | −72% |
+| `/counters/[id]/edit` | 49 kB | 122 kB | −73% |
+| `/privacy` | 45 kB | 115 kB | −75% |
+
+All client JavaScript in the build comes to 59 kB gzipped. None of it is Supabase code: the SDK runs only on the server.
+
+The counters page came in above the 25–35 kB estimate. About 35 kB of every page is the framework itself: the Svelte runtime is 19.5 kB and SvelteKit's client router is 15.7 kB. The estimate counted the components but not that floor. The empty page from build step 1 already shipped 32 kB. On top of the floor, the root layout and shared components add about 10 kB, and the counters page adds 7 kB of its own.
+
+### Still to measure
+
+Lighthouse (mobile) and the time until the counter list appears on throttled 4G. These need the production deployment, so they will be run after the cutover with the method used for the baseline.

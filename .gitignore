@@ -12,9 +12,13 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
-dist-ssr
 *.local
+
+# SvelteKit / Vercel output
+/.svelte-kit
+/build
+.vercel
+vite.config.ts.timestamp-*
 
 # Editor directories and files
 .vscode/*
@@ -29,3 +33,6 @@ dist-ssr
 
 # Supabase CLI cache
 supabase/.temp
+
+# Saved counters
+saved-counters.png

@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+/* fonts */
+@import "@fontsource/barlow/400.css";
+@import "@fontsource/barlow/500.css";
+@import "@fontsource/barlow/600.css";
+@import "@fontsource/barlow-condensed/500.css";
+@import "@fontsource/barlow-condensed/600.css";
+@import "@fontsource/barlow-condensed/700.css";
+
+/*
+ * Water-meter register palette. Light is the default; dark follows the OS
+ * unless the user picks a theme (html[data-theme]).
+ * --fail is for a failed save only, never decoration.
+ */
+:root {
+  color-scheme: light;
+  --page: #eceff1;
+  --surface: #f8fafb;
+  --ink: #14181c;
+  --ink-muted: #46515a;
+  --line: #b9c3ca;
+  --accent: #1f5f8b;
+  --plate: #1f5f8b;
+  --plate-ink: #ffffff;
+  --tile: #0d1114;
+  --tile-ink: #eceff1;
+  --fail: #b3261e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #101418;
+    --surface: #171c21;
+    --ink: #e6ebef;
+    --ink-muted: #9aa7b1;
+    --line: #2f3a43;
+    --accent: #73b4e0;
+    --plate: #1a4d70;
+    --plate-ink: #ffffff;
+    --tile: #e6ebef;
+    --tile-ink: #101418;
+    --fail: #ff8f86;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #101418;
+  --surface: #171c21;
+  --ink: #e6ebef;
+  --ink-muted: #9aa7b1;
+  --line: #2f3a43;
+  --accent: #73b4e0;
+  --plate: #1a4d70;
+  --plate-ink: #ffffff;
+  --tile: #e6ebef;
+  --tile-ink: #101418;
+  --fail: #ff8f86;
+}
+
+@theme inline {
+  --font-sans:
+    "Barlow", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --font-label:
+    "Barlow Condensed", "Barlow", ui-sans-serif, system-ui, sans-serif;
+
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-plate: var(--plate);
+  --color-plate-ink: var(--plate-ink);
+  --color-tile: var(--tile);
+  --color-tile-ink: var(--tile-ink);
+  --color-fail: var(--fail);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+  body {
+    background-color: var(--page);
+    color: var(--ink);
+  }
+}
+
+@layer components {
+  /* Plain outlined controls. */
+  .ui-btn {
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-sm border-2 border-ink bg-transparent px-5 py-2 font-label text-lg font-semibold tracking-wider text-ink uppercase transition-colors hover:bg-ink hover:text-page focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent active:bg-ink active:text-page disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-ink;
+  }
+  .ui-btn-primary {
+    @apply border-accent text-accent hover:bg-accent hover:text-page active:bg-accent active:text-page disabled:hover:text-accent;
+  }
+  .ui-btn-icon {
+    @apply inline-flex size-12 cursor-pointer items-center justify-center rounded-sm text-ink-muted transition-colors hover:text-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .ui-input {
+    @apply min-h-12 w-full rounded-sm border-2 border-ink-muted bg-surface px-3 py-2 text-lg text-ink placeholder:text-ink-muted focus-visible:border-accent focus-visible:outline-3 focus-visible:outline-offset-1 focus-visible:outline-accent;
+  }
+  .ui-label {
+    @apply font-label text-base font-semibold tracking-wider text-accent uppercase;
+  }
+  .ui-link {
+    @apply text-accent underline underline-offset-2 hover:no-underline;
+  }
+}
+
+/* Motion: action feedback only. */
+@media (prefers-reduced-motion: no-preference) {
+  .drum-roll {
+    animation: drum-roll 180ms ease-out;
+  }
+}
+
+@keyframes drum-roll {
+  from {
+    transform: translateY(-40%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+  }
+}
+
+/*
+ * Theme toggle icon: CSS picks it, so server-rendered HTML is right on first
+ * paint. Moon offers dark while light is showing; sun offers light.
+ */
+.theme-when-dark {
+  display: none;
+}
+:root[data-theme="dark"] .theme-when-dark {
+  display: block;
+}
+:root[data-theme="dark"] .theme-when-light {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-when-dark {
+    display: block;
+  }
+  :root:not([data-theme="light"]) .theme-when-light {
+    display: none;
+  }
+}
+
+/* Browser surfaces carry the palette too. */
+::selection {
+  background-color: var(--accent);
+  color: var(--page);
+}
+input,
+textarea {
+  caret-color: var(--accent);
+}

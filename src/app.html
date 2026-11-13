@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="%sveltekit.assets%/favicon.svg"
+    />
+    <meta
+      name="description"
+      content="A set of counters for anything you want to keep a running count of. Add a goal, tap plus or minus, and your number is saved."
+    />
+
+    <!-- Open Graph (social previews: Slack, Twitter/X, LinkedIn, etc.) -->
+    <meta property="og:title" content="Countsy: Simple counters" />
+    <meta
+      property="og:description"
+      content="A set of counters for anything you want to keep a running count of. Add a goal, tap plus or minus, and your number is saved."
+    />
+    <meta
+      property="og:image"
+      content="https://countsy.cisocodes.com/og-image.png"
+    />
+    <meta property="og:url" content="https://countsy.cisocodes.com" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Countsy: Simple counters" />
+    <meta
+      name="twitter:description"
+      content="A set of counters for anything you want to keep a running count of. Add a goal, tap plus or minus, and your number is saved."
+    />
+    <meta
+      name="twitter:image"
+      content="https://countsy.cisocodes.com/og-image.png"
+    />
+
+    <!-- Apply a saved theme before first paint, so there is no flash. -->
+    <script>
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark")
+          document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+    %sveltekit.head%
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <div style="display: contents">%sveltekit.body%</div>
+  </body>
+</html>

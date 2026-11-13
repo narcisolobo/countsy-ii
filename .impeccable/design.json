@@ -1,12 +1,13 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-11T03:14:24.694662Z",
+  "generatedAt": "2026-11-13T21:00:00+00:00",
   "title": "Design System: Countsy",
   "extensions": {
     "colorMeta": {
       "meter-blue": {
         "role": "primary",
         "displayName": "Meter Blue",
+        "purpose": "Header plate, unit labels, primary button outline, focus rings, links, gauge water, reached gauge, text selection and caret.",
         "canonical": "#1f5f8b",
         "tonalRamp": [
           "#001137",
@@ -22,6 +23,7 @@
       "enamel-grey": {
         "role": "neutral",
         "displayName": "Enamel Grey",
+        "purpose": "Page ground; digit color on light-mode drum tiles. Cool, never cream.",
         "canonical": "#eceff1",
         "tonalRamp": [
           "#101213",
@@ -34,9 +36,26 @@
           "#edeeef"
         ]
       },
+      "porcelain": {
+        "role": "neutral",
+        "displayName": "Porcelain",
+        "purpose": "Card, input, drawer and dialog surface.",
+        "canonical": "#f8fafb",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#242526",
+          "#414243",
+          "#606162",
+          "#818283",
+          "#a4a5a6",
+          "#c8c9ca",
+          "#eeeeef"
+        ]
+      },
       "ink": {
         "role": "neutral",
         "displayName": "Ink",
+        "purpose": "Body text, headings, button outlines, fills on press, field errors and status lines.",
         "canonical": "#14181c",
         "tonalRamp": [
           "#0e1216",
@@ -49,9 +68,90 @@
           "#edeff1"
         ]
       },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Ink Muted",
+        "purpose": "Secondary text, goal line, empty states, input outlines, gauge before the goal.",
+        "canonical": "#46515a",
+        "tonalRamp": [
+          "#080c0f",
+          "#20262b",
+          "#3b434a",
+          "#58636b",
+          "#79848d",
+          "#9da6ae",
+          "#c2cad1",
+          "#e9eff5"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "purpose": "Card borders and dividers.",
+        "canonical": "#b9c3ca",
+        "tonalRamp": [
+          "#080c0e",
+          "#212629",
+          "#3c4348",
+          "#5a6368",
+          "#7b848a",
+          "#9fa6ac",
+          "#c4cacf",
+          "#eaeff3"
+        ]
+      },
+      "drum-black": {
+        "role": "neutral",
+        "displayName": "Drum Black",
+        "purpose": "Drum tile ground in light mode.",
+        "canonical": "#0d1114",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#232528",
+          "#3f4345",
+          "#5d6266",
+          "#7e8387",
+          "#a1a6a9",
+          "#c6cacc",
+          "#eceff1"
+        ]
+      },
+      "drum-digit": {
+        "role": "neutral",
+        "displayName": "Drum Digit",
+        "purpose": "Digit color on light-mode drum tiles.",
+        "canonical": "#eceff1",
+        "tonalRamp": [
+          "#0a0b0c",
+          "#242526",
+          "#404243",
+          "#5f6263",
+          "#808384",
+          "#a3a5a7",
+          "#c7c9cb",
+          "#edeff0"
+        ]
+      },
+      "plate-ink": {
+        "role": "neutral",
+        "displayName": "Plate Ink",
+        "purpose": "Text and icons on the header plate.",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
       "fail-red": {
         "role": "state",
         "displayName": "Fail Red",
+        "purpose": "Failed save or load messages only; never the error page heading or a delete action.",
         "canonical": "#b3261e",
         "tonalRamp": [
           "#450000",
@@ -63,28 +163,156 @@
           "#ff9f8c",
           "#ffe0d7"
         ]
+      },
+      "dark-panel": {
+        "role": "neutral",
+        "displayName": "Dark Panel",
+        "purpose": "Dark-mode page ground; digit color on dark-mode tiles.",
+        "canonical": "#101418",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#232528",
+          "#3f4246",
+          "#5d6266",
+          "#7e8388",
+          "#a1a6aa",
+          "#c6cacd",
+          "#eceff2"
+        ]
+      },
+      "dark-surface": {
+        "role": "neutral",
+        "displayName": "Dark Surface",
+        "purpose": "Dark-mode card, input and dialog surface.",
+        "canonical": "#171c21",
+        "tonalRamp": [
+          "#090b0e",
+          "#222529",
+          "#3e4347",
+          "#5c6268",
+          "#7d8389",
+          "#a0a6ab",
+          "#c5cace",
+          "#ebeff2"
+        ]
+      },
+      "dark-ink": {
+        "role": "neutral",
+        "displayName": "Dark Ink",
+        "purpose": "Dark-mode text; dark-mode drum tile ground.",
+        "canonical": "#e6ebef",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#232527",
+          "#3f4245",
+          "#5e6265",
+          "#7f8386",
+          "#a2a5a8",
+          "#c6c9cc",
+          "#eceff1"
+        ]
+      },
+      "dark-ink-muted": {
+        "role": "neutral",
+        "displayName": "Dark Ink Muted",
+        "purpose": "Dark-mode secondary text and outlines.",
+        "canonical": "#9aa7b1",
+        "tonalRamp": [
+          "#080c0f",
+          "#1f262b",
+          "#3b434a",
+          "#58636b",
+          "#79848d",
+          "#9ca7ae",
+          "#c2cad1",
+          "#e9eff5"
+        ]
+      },
+      "dark-hairline": {
+        "role": "neutral",
+        "displayName": "Dark Hairline",
+        "purpose": "Dark-mode borders and dividers.",
+        "canonical": "#2f3a43",
+        "tonalRamp": [
+          "#080c0f",
+          "#1f262b",
+          "#3a434a",
+          "#58636c",
+          "#78848e",
+          "#9ca7af",
+          "#c2cad2",
+          "#e9eff5"
+        ]
+      },
+      "dark-accent-sky": {
+        "role": "primary",
+        "displayName": "Dark Accent Sky",
+        "purpose": "Dark-mode text accents: labels, primary button, focus, links.",
+        "canonical": "#73b4e0",
+        "tonalRamp": [
+          "#000d1c",
+          "#01283e",
+          "#154764",
+          "#2c678c",
+          "#4f89b0",
+          "#7bacce",
+          "#a7cfec",
+          "#d4f3ff"
+        ]
+      },
+      "dark-plate": {
+        "role": "primary",
+        "displayName": "Dark Plate",
+        "purpose": "Dark-mode header plate.",
+        "canonical": "#1a4d70",
+        "tonalRamp": [
+          "#000c1a",
+          "#0b283c",
+          "#214660",
+          "#396688",
+          "#5a88ab",
+          "#83aac9",
+          "#adcee8",
+          "#d9f2ff"
+        ]
+      },
+      "dark-fail-red": {
+        "role": "state",
+        "displayName": "Dark Fail Red",
+        "purpose": "Dark-mode failed save or load message.",
+        "canonical": "#ff8f86",
+        "tonalRamp": [
+          "#200000",
+          "#470d0d",
+          "#702522",
+          "#9d3e3a",
+          "#c3615a",
+          "#e08a82",
+          "#fdb4ac",
+          "#ffded8"
+        ]
       }
     },
     "typographyMeta": {
       "plate": {
         "displayName": "Plate",
-        "purpose": "Wordmark and page titles."
+        "purpose": "\"Countsy\" in the header (0.1em tracking) and page headings (0.05em), uppercase."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Counter titles and field labels."
+        "purpose": "Counter titles and confirm dialog headings at 1.25rem, field labels at 1rem; uppercase, meter blue."
       },
       "button": {
         "displayName": "Button",
-        "purpose": "Control text."
+        "purpose": "Control text, uppercase."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Prose and messages."
+        "purpose": "Paragraphs and messages near 65ch; inputs and drawer items at 1.125rem; descriptions at snug leading; footer at 0.875rem."
       },
       "register": {
         "displayName": "Register",
-        "purpose": "Drum digits."
+        "purpose": "Drum digits; steps down to 60px at 5 characters, 48px at 6, 38px at 7 or more."
       }
     },
     "shadows": [],
@@ -103,6 +331,11 @@
         "name": "press",
         "value": "color transition 150ms",
         "purpose": "Button fill on hover and press."
+      },
+      {
+        "name": "gauge-glass",
+        "value": "color transition 200ms",
+        "purpose": "Glass, lip and marks turn from Ink Muted to Meter Blue when the goal is reached."
       }
     ],
     "breakpoints": [
@@ -123,7 +356,7 @@
       "refersTo": "button",
       "description": "Plain outlined control; fills with ink on press.",
       "html": "<button class=\"ds-btn\">Show archived</button>",
-      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:8px 20px;border:2px solid var(--ink,#14181c);border-radius:2px;background:transparent;color:var(--ink,#14181c);font:600 18px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background-color .15s,color .15s}.ds-btn:hover,.ds-btn:active{background:var(--ink,#14181c);color:var(--page,#eceff1)}.ds-btn:focus-visible{outline:3px solid var(--accent,#1f5f8b);outline-offset:2px}"
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:8px 20px;border:2px solid var(--ink,#14181c);border-radius:2px;background:transparent;color:var(--ink,#14181c);font:600 18px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background-color .15s,color .15s}.ds-btn:hover,.ds-btn:active{background:var(--ink,#14181c);color:var(--page,#eceff1)}.ds-btn:focus-visible{outline:3px solid var(--accent,#1f5f8b);outline-offset:2px}"
     },
     {
       "name": "Primary Button",
@@ -131,23 +364,23 @@
       "refersTo": "button-primary",
       "description": "Same control in meter blue; one per view.",
       "html": "<button class=\"ds-btn ds-btn-primary\">New counter</button>",
-      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:8px 20px;border:2px solid var(--ink,#14181c);border-radius:2px;background:transparent;color:var(--ink,#14181c);font:600 18px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background-color .15s,color .15s}.ds-btn:hover,.ds-btn:active{background:var(--ink,#14181c);color:var(--page,#eceff1)}.ds-btn:focus-visible{outline:3px solid var(--accent,#1f5f8b);outline-offset:2px}.ds-btn-primary{border-color:var(--accent,#1f5f8b);color:var(--accent,#1f5f8b)}.ds-btn-primary:hover,.ds-btn-primary:active{background:var(--accent,#1f5f8b);color:var(--page,#eceff1)}"
-    },
-    {
-      "name": "Input",
-      "kind": "input",
-      "refersTo": "input",
-      "description": "Porcelain field with 2px muted outline.",
-      "html": "<label class=\"ds-label\" for=\"e\">Email</label><input id=\"e\" class=\"ds-input\" type=\"email\">",
-      "css": ".ds-label{display:block;font:600 16px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--accent,#1f5f8b)}.ds-input{box-sizing:border-box;width:100%;min-height:48px;padding:8px 12px;border:2px solid var(--ink-muted,#46515a);border-radius:2px;background:var(--surface,#f8fafb);color:var(--ink,#14181c);font:18px Barlow,sans-serif}.ds-input:focus-visible{border-color:var(--accent,#1f5f8b);outline:3px solid var(--accent,#1f5f8b);outline-offset:1px}"
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:8px 20px;border:2px solid var(--ink,#14181c);border-radius:2px;background:transparent;color:var(--ink,#14181c);font:600 18px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background-color .15s,color .15s}.ds-btn:hover,.ds-btn:active{background:var(--ink,#14181c);color:var(--page,#eceff1)}.ds-btn:focus-visible{outline:3px solid var(--accent,#1f5f8b);outline-offset:2px}.ds-btn-primary{border-color:var(--accent,#1f5f8b);color:var(--accent,#1f5f8b)}.ds-btn-primary:hover,.ds-btn-primary:active{background:var(--accent,#1f5f8b);color:var(--page,#eceff1)}"
     },
     {
       "name": "Header Plate",
       "kind": "nav",
       "refersTo": "header-plate",
-      "description": "Meter-blue plate with wordmark and icon buttons.",
+      "description": "Meter-blue plate with the condensed wordmark; theme toggle and menu icons stay white on it.",
       "html": "<header class=\"ds-plate\"><span class=\"ds-plate-name\">Countsy</span></header>",
       "css": ".ds-plate{background:var(--plate,#1f5f8b);color:#fff;padding:8px 16px}.ds-plate-name{font:700 30px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase}"
+    },
+    {
+      "name": "Counter Card",
+      "kind": "card",
+      "refersTo": "counter-card",
+      "description": "Full-width title row (title, edit and archive icons at 48px), optional two-line description, then register, goal line and minus/plus pair.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-head\"><span class=\"ds-card-title\">Water</span><button class=\"ds-icon\" aria-label=\"Edit Water\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M13 21h8\"/><path d=\"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z\"/></svg></button><button class=\"ds-icon\" aria-label=\"Archive Water\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect width=\"20\" height=\"5\" x=\"2\" y=\"3\" rx=\"1\"/><path d=\"M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8\"/><path d=\"M10 12h4\"/></svg></button></div><p class=\"ds-card-desc\">Glasses a day, counted at the tap.</p><div class=\"ds-card-body\"><div class=\"ds-goal\">of 8</div></div></article>",
+      "css": ".ds-card{background:var(--surface,#f8fafb);border:1px solid var(--line,#b9c3ca);border-radius:2px;max-width:340px}.ds-card-head{display:flex;align-items:flex-start;gap:4px;padding:8px 4px 0 16px}.ds-card-title{flex:1;display:flex;align-items:center;min-height:48px;font:600 20px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--accent,#1f5f8b)}.ds-icon{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border:0;border-radius:2px;background:transparent;color:var(--ink-muted,#46515a);cursor:pointer;transition:color .15s}.ds-icon:hover{color:var(--ink,#14181c)}.ds-icon:focus-visible{outline:3px solid var(--accent,#1f5f8b);outline-offset:2px}.ds-card-desc{margin:0;padding:0 28px 0 16px;font:400 16px/1.375 Barlow,sans-serif;color:var(--ink-muted,#46515a);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.ds-card-body{padding:12px 16px 16px}.ds-goal{height:24px;font:500 18px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted,#46515a)}"
     },
     {
       "name": "Drum Register",
@@ -158,20 +391,44 @@
       "css": ".ds-drum{display:flex;gap:3px;font:600 74px/1 Barlow,sans-serif;font-variant-numeric:tabular-nums}.ds-tile{position:relative;display:flex;align-items:center;justify-content:center;width:.7em;height:1.3em;border-radius:.06em;background:var(--tile,#0d1114);color:var(--tile-ink,#eceff1);overflow:hidden}.ds-tile::after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:currentColor;opacity:.15}"
     },
     {
-      "name": "Counter Card",
-      "kind": "card",
-      "refersTo": "counter-card",
-      "description": "Title, register, goal line and a minus/plus pair.",
-      "html": "<article class=\"ds-card\"><div class=\"ds-card-title\">Water</div><div class=\"ds-goal\">of 8</div></article>",
-      "css": ".ds-card{background:var(--surface,#f8fafb);border:1px solid var(--line,#b9c3ca);border-radius:2px;padding:12px 16px}.ds-card-title{font:600 20px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--accent,#1f5f8b)}.ds-goal{margin-top:8px;font:600 18px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted,#46515a)}"
-    },
-    {
       "name": "Goal Gauge",
       "kind": "custom",
       "refersTo": "counter-card",
-      "description": "Narrow open-topped glass down the card's right edge; water fills to a brim line at the goal and tops up past it.",
-      "html": "<div class=\"ds-gauge\" role=\"meter\" aria-valuemin=\"0\" aria-valuemax=\"8\" aria-valuenow=\"7\" aria-label=\"7 of 8\"><div class=\"ds-gauge-water\" style=\"height:82%\"></div><div class=\"ds-gauge-lip\"></div><div class=\"ds-gauge-brim\"></div></div>",
-      "css": ".ds-gauge{position:relative;width:14px;height:160px;border:2px solid var(--ink-muted,#46515a);border-top:0;border-radius:0 0 3px 3px}.ds-gauge-water{position:absolute;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--accent,#1f5f8b) 85%,transparent);border-top:2px solid var(--accent,#1f5f8b);transition:height 180ms ease-out}.ds-gauge-lip{position:absolute;top:-1px;left:-2px;right:-6px;height:2px;background:var(--ink-muted,#46515a)}.ds-gauge-brim{position:absolute;right:0;bottom:94%;width:50%;height:2px;background:var(--ink-muted,#46515a)}"
+      "description": "Narrow open-topped glass that starts below the title row and runs beside the register, goal line and minus/plus pair: brim line at 94% marks the goal, short marks at a quarter, half and three quarters; water fills to the brim at the goal and tops up past it; glass turns meter blue once reached.",
+      "html": "<div style=\"display:flex;gap:24px\"><div class=\"ds-gauge\" role=\"meter\" aria-valuemin=\"0\" aria-valuemax=\"8\" aria-valuenow=\"5\" aria-label=\"5 of 8\"><div class=\"ds-gauge-water\" style=\"height:59%\"></div><div class=\"ds-gauge-lip\"></div><div class=\"ds-gauge-mark\" style=\"bottom:23.5%\"></div><div class=\"ds-gauge-mark\" style=\"bottom:47%\"></div><div class=\"ds-gauge-mark\" style=\"bottom:70.5%\"></div><div class=\"ds-gauge-brim\"></div></div><div class=\"ds-gauge ds-gauge-reached\" role=\"meter\" aria-valuemin=\"0\" aria-valuemax=\"8\" aria-valuenow=\"8\" aria-label=\"8 of 8, goal reached\"><div class=\"ds-gauge-water\" style=\"height:94%\"></div><div class=\"ds-gauge-lip\"></div><div class=\"ds-gauge-mark\" style=\"bottom:23.5%\"></div><div class=\"ds-gauge-mark\" style=\"bottom:47%\"></div><div class=\"ds-gauge-mark\" style=\"bottom:70.5%\"></div><div class=\"ds-gauge-brim\"></div></div></div>",
+      "css": ".ds-gauge{position:relative;width:14px;height:160px;border:2px solid var(--ink-muted,#46515a);border-top:0;border-radius:0 0 3px 3px;transition:border-color .2s}.ds-gauge-water{position:absolute;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--accent,#1f5f8b) 85%,transparent);border-top:2px solid var(--accent,#1f5f8b);transition:height 180ms ease-out}.ds-gauge-lip{position:absolute;top:-1px;left:-2px;right:-6px;height:2px;background:var(--ink-muted,#46515a)}.ds-gauge-mark{position:absolute;right:0;width:40%;height:1px;background:var(--ink-muted,#46515a)}.ds-gauge-brim{position:absolute;right:0;bottom:94%;width:50%;height:2px;background:var(--ink-muted,#46515a)}.ds-gauge-reached{border-color:var(--accent,#1f5f8b)}.ds-gauge-reached .ds-gauge-lip,.ds-gauge-reached .ds-gauge-mark,.ds-gauge-reached .ds-gauge-brim{background:var(--accent,#1f5f8b)}@media (prefers-reduced-motion:reduce){.ds-gauge-water{transition:none}}"
+    },
+    {
+      "name": "Archived Card Footer",
+      "kind": "card",
+      "refersTo": "counter-card",
+      "description": "Archived cards are read-only: \"Archived\" on the goal line and outlined Restore / Delete in place of minus/plus. Delete is never red.",
+      "html": "<div class=\"ds-arch\"><div class=\"ds-arch-goal\">of 8 <b>Archived</b></div><div class=\"ds-arch-pair\"><button class=\"ds-arch-btn\">Restore</button><button class=\"ds-arch-btn\">Delete</button></div></div>",
+      "css": ".ds-arch{max-width:300px;padding:12px 16px 16px;background:var(--surface,#f8fafb);border:1px solid var(--line,#b9c3ca);border-radius:2px}.ds-arch-goal{height:24px;font:500 18px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted,#46515a)}.ds-arch-goal b{font-weight:600;margin-left:12px}.ds-arch-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-top:8px}.ds-arch-btn{min-height:50px;padding:8px 20px;border:2px solid var(--ink,#14181c);border-radius:2px;background:transparent;color:var(--ink,#14181c);font:600 18px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background-color .15s,color .15s}.ds-arch-btn:hover,.ds-arch-btn:active{background:var(--ink,#14181c);color:var(--page,#eceff1)}.ds-arch-btn:focus-visible{outline:3px solid var(--accent,#1f5f8b);outline-offset:2px}"
+    },
+    {
+      "name": "Confirm Dialog",
+      "kind": "custom",
+      "refersTo": "confirm-dialog",
+      "description": "Archive and delete confirmation: Porcelain, 2px hairline border, 2px corners, 50% black backdrop, no shadow; Cancel takes focus first, confirm is the primary.",
+      "html": "<div class=\"ds-scrim\"><div class=\"ds-dialog\" role=\"dialog\" aria-labelledby=\"ds-dh\"><h2 id=\"ds-dh\" class=\"ds-dialog-h\">Delete this counter?</h2><p class=\"ds-dialog-p\"><b>Coffee cups</b> and its count of 12 will be deleted. This can't be undone.</p><div class=\"ds-dialog-actions\"><button class=\"ds-dbtn\">Cancel</button><button class=\"ds-dbtn ds-dbtn-primary\">Delete</button></div></div></div>",
+      "css": ".ds-scrim{padding:24px;background:rgb(0 0 0/.5)}.ds-dialog{max-width:28rem;margin:auto;padding:24px;background:var(--surface,#f8fafb);color:var(--ink,#14181c);border:2px solid var(--line,#b9c3ca);border-radius:2px}.ds-dialog-h{margin:0;font:600 20px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--accent,#1f5f8b)}.ds-dialog-p{margin:0;padding:16px 0;font:400 16px/1.5 Barlow,sans-serif}.ds-dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}.ds-dbtn{min-height:48px;padding:8px 20px;border:2px solid var(--ink,#14181c);border-radius:2px;background:transparent;color:var(--ink,#14181c);font:600 18px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background-color .15s,color .15s}.ds-dbtn:hover,.ds-dbtn:active{background:var(--ink,#14181c);color:var(--page,#eceff1)}.ds-dbtn:focus-visible{outline:3px solid var(--accent,#1f5f8b);outline-offset:2px}.ds-dbtn-primary{border-color:var(--accent,#1f5f8b);color:var(--accent,#1f5f8b)}.ds-dbtn-primary:hover,.ds-dbtn-primary:active{background:var(--accent,#1f5f8b);color:var(--page,#eceff1)}"
+    },
+    {
+      "name": "Edit Form Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Labelled field in the 36rem form card: meter-blue condensed label, Porcelain field with 2px muted outline, tabular numerals for numbers, Ink semibold error under the field.",
+      "html": "<div class=\"ds-form\"><div class=\"ds-field\"><label class=\"ds-label\" for=\"ds-goal\">Goal (optional)</label><input id=\"ds-goal\" class=\"ds-input ds-num\" type=\"number\" value=\"0\" aria-invalid=\"true\" aria-describedby=\"ds-goal-msg\"><p id=\"ds-goal-msg\" class=\"ds-err\">Enter a whole number above 0, or leave it empty.</p></div></div>",
+      "css": ".ds-form{max-width:36rem;padding:24px;background:var(--surface,#f8fafb);border:1px solid var(--line,#b9c3ca);border-radius:2px}.ds-field{display:flex;flex-direction:column;gap:4px}.ds-label{font:600 16px 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--accent,#1f5f8b)}.ds-input{min-height:48px;padding:8px 12px;border:2px solid var(--ink-muted,#46515a);border-radius:2px;background:var(--surface,#f8fafb);color:var(--ink,#14181c);font:18px Barlow,sans-serif;caret-color:var(--accent,#1f5f8b)}.ds-input:focus-visible{border-color:var(--accent,#1f5f8b);outline:3px solid var(--accent,#1f5f8b);outline-offset:1px}.ds-num{font-variant-numeric:tabular-nums}.ds-err{margin:0;font:600 16px Barlow,sans-serif;color:var(--ink,#14181c)}"
+    },
+    {
+      "name": "Text Link",
+      "kind": "nav",
+      "refersTo": "link",
+      "description": "Meter-blue underlined link; as page navigation it is 48px tall with a leading arrow.",
+      "html": "<a class=\"ds-link\" href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m12 19-7-7 7-7\"/><path d=\"M19 12H5\"/></svg> Back to counters</a>",
+      "css": ".ds-link{display:inline-flex;align-items:center;gap:4px;min-height:48px;font:400 16px Barlow,sans-serif;color:var(--accent,#1f5f8b);text-decoration:underline;text-underline-offset:2px}.ds-link:hover{text-decoration:none}.ds-link:focus-visible{outline:3px solid var(--accent,#1f5f8b);outline-offset:2px}"
     }
   ],
   "narrative": {
@@ -224,7 +481,8 @@
       "**Don't** use shadows, gradients, mascots, or the neon dark look of the earlier theme.",
       "**Don't** add a second celebration, streaks, badges or other decorative motion.",
       "**Don't** color digits individually or use red for emphasis or delete actions.",
-      "**Don't** use cream or warm grounds; the enamel is cool."
+      "**Don't** use cream or warm grounds; the enamel is cool.",
+      "**Don't** restyle the Google sign-in button to the system, or borrow its colors, Roboto or shadow anywhere else."
     ]
   }
 }
