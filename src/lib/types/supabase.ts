@@ -43,7 +43,9 @@ export type Database = {
             [_ in never]: never
           }
           Functions: {
-            [_ in never]: never
+            "increment_counter":
+{ Args: { "counter_id": string,"delta": number }; Returns: number
+                           }
           }
           Enums: {
             [_ in never]: never
