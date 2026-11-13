@@ -5,7 +5,7 @@
   import { page } from "$app/state";
   import type { LayoutProps } from "./$types";
 
-  let { children }: LayoutProps = $props();
+  let { children, data }: LayoutProps = $props();
 </script>
 
 <svelte:head>
@@ -17,7 +17,7 @@
   />
 </svelte:head>
 
-<Header />
+<Header signedIn={data.signedIn} />
 <main>
   {@render children()}
 </main>

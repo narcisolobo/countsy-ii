@@ -1,6 +1,10 @@
-<!-- Meter-blue header plate. The theme toggle and menu arrive with the counters screen. -->
+<!-- Meter-blue header plate: wordmark, theme toggle, menu. -->
 <script lang="ts">
   import { resolve } from "$app/paths";
+  import Menu from "./Menu.svelte";
+  import ThemeToggle from "./ThemeToggle.svelte";
+
+  let { signedIn }: { signedIn: boolean } = $props();
 </script>
 
 <header class="bg-plate text-plate-ink">
@@ -11,5 +15,7 @@
     >
       Countsy
     </a>
+    <ThemeToggle />
+    <Menu {signedIn} />
   </nav>
 </header>
