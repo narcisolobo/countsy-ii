@@ -2,7 +2,9 @@
   import { deserialize, enhance } from "$app/forms";
   import ConfirmDialog from "#lib/components/ConfirmDialog.svelte";
   import type { Counter } from "#lib/types/counter.js";
+  import { resolve } from "$app/paths";
   import Archive from "@lucide/svelte/icons/archive";
+  import PencilLine from "@lucide/svelte/icons/pencil-line";
   import Minus from "@lucide/svelte/icons/minus";
   import Plus from "@lucide/svelte/icons/plus";
   import DrumRegister from "./DrumRegister.svelte";
@@ -120,7 +122,6 @@
 >
   <div class="flex min-w-0 flex-1 flex-col">
     <div class="pt-3 pr-1 pl-4">
-      <!-- Slice 5 adds the edit button to this row. -->
       <div class="flex items-start gap-1">
         <CounterTitle
           id={counter.id}
@@ -128,6 +129,14 @@
           labelId={titleId}
           startEditing={justCreated}
         />
+        <a
+          href={resolve("/counters/[id]/edit", { id: counter.id })}
+          aria-label={`Edit ${counter.title}`}
+          title="Edit"
+          class="ui-btn-icon -mt-1.5 shrink-0"
+        >
+          <PencilLine size={22} aria-hidden="true" />
+        </a>
         {#if !counter.is_archived}
           <button
             type="button"
