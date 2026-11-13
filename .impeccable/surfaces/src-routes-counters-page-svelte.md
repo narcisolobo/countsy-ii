@@ -1,8 +1,8 @@
 ---
 version: 1
-slug: "src-pages-counterspage-tsx"
-primary_target: "src/pages/CountersPage.tsx"
-related_targets: ["src/pages/EditCounterPage.tsx","src/pages/SignInPage.tsx"]
+slug: "src-routes-counters-page-svelte"
+primary_target: "src/routes/counters/+page.svelte"
+related_targets: ["src/routes/+page.svelte","src/routes/privacy/+page.svelte","src/routes/terms/+page.svelte"]
 ---
 
 # Countsy redesign (Operate; applies to counters, edit, sign-in, legal pages)
