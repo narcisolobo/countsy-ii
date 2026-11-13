@@ -9,6 +9,45 @@
 @import "@fontsource/barlow-condensed/700.css";
 
 /*
+ * Fallback faces sized to match Barlow's metrics, so the swap to the web font
+ * when it arrives does not move the layout (ADR 0001, Results). Generated with
+ * Capsize (@capsizecss/core createFontStack, metrics 4.4.0): Arial covers
+ * desktop, Roboto covers Android. Regenerate if the fonts change.
+ */
+@font-face {
+  font-family: "Barlow Fallback: Arial";
+  src: local("Arial"), local("ArialMT");
+  ascent-override: 103.4341%;
+  descent-override: 20.6868%;
+  line-gap-override: 0%;
+  size-adjust: 96.68%;
+}
+@font-face {
+  font-family: "Barlow Fallback: Roboto";
+  src: local("Roboto Regular"), local("Roboto-Regular");
+  ascent-override: 103.2075%;
+  descent-override: 20.6415%;
+  line-gap-override: 0%;
+  size-adjust: 96.8922%;
+}
+@font-face {
+  font-family: "Barlow Condensed Fallback: Arial";
+  src: local("Arial"), local("ArialMT");
+  ascent-override: 130.7334%;
+  descent-override: 26.1467%;
+  line-gap-override: 0%;
+  size-adjust: 76.4916%;
+}
+@font-face {
+  font-family: "Barlow Condensed Fallback: Roboto";
+  src: local("Roboto Regular"), local("Roboto-Regular");
+  ascent-override: 130.447%;
+  descent-override: 26.0894%;
+  line-gap-override: 0%;
+  size-adjust: 76.6595%;
+}
+
+/*
  * Water-meter register palette. Light is the default; dark follows the OS
  * unless the user picks a theme (html[data-theme]).
  * --fail is for a failed save only, never decoration.
@@ -62,11 +101,14 @@
 
 @theme inline {
   --font-sans:
-    "Barlow", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    "Barlow", "Barlow Fallback: Arial", "Barlow Fallback: Roboto",
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
 
   --font-label:
-    "Barlow Condensed", "Barlow", ui-sans-serif, system-ui, sans-serif;
+    "Barlow Condensed", "Barlow Condensed Fallback: Arial",
+    "Barlow Condensed Fallback: Roboto", "Barlow", ui-sans-serif, system-ui,
+    sans-serif;
 
   --color-page: var(--page);
   --color-surface: var(--surface);
