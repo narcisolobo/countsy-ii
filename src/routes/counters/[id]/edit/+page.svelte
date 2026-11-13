@@ -95,7 +95,13 @@
   />
 {/snippet}
 
-<section class="mx-auto min-h-[70vh] max-w-5xl px-4 py-6">
+<section class="mx-auto w-full max-w-5xl px-4 pt-2 pb-6">
+  <a
+    href={resolve("/counters")}
+    class="ui-link inline-flex min-h-12 items-center gap-1"
+  >
+    <ArrowLeft size={20} aria-hidden="true" /> Back to counters
+  </a>
   <h1 class="font-label mb-6 text-3xl font-bold tracking-wider uppercase">
     Edit counter
   </h1>
@@ -128,10 +134,12 @@
       {/if}
     </div>
 
-    <div class="mt-2 flex flex-wrap gap-3">
-      <a href={resolve("/counters")} class="ui-btn">
-        <ArrowLeft aria-hidden="true" /> Back
-      </a>
+    <!-- Save leads; Archive (which asks first) sits apart on the far side. -->
+    <div class="mt-2 flex flex-wrap items-center justify-between gap-3">
+      <button class="ui-btn ui-btn-primary" disabled={saving}>
+        <Save aria-hidden="true" />
+        {saving ? "Saving…" : "Save"}
+      </button>
       {#if !counter.is_archived}
         <button
           type="button"
@@ -144,10 +152,6 @@
           <Archive aria-hidden="true" /> Archive
         </button>
       {/if}
-      <button class="ui-btn ui-btn-primary" disabled={saving}>
-        <Save aria-hidden="true" />
-        {saving ? "Saving…" : "Save"}
-      </button>
     </div>
   </form>
 </section>

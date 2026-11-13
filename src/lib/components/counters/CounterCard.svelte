@@ -118,11 +118,19 @@
 
 <article
   aria-labelledby={titleId}
-  class="bg-surface border-line flex rounded-sm border"
+  class="bg-surface border-line flex flex-col rounded-sm border"
 >
-  <div class="flex min-w-0 flex-1 flex-col">
-    <div class="pt-3 pr-1 pl-4">
-      <div class="flex items-start gap-1">
+  <!-- Title row spans the whole card, so icons line up down the list. -->
+  <div class="pt-2 pr-1 pl-4">
+    <div class="flex items-start gap-1">
+      {#if counter.is_archived}
+        <!-- Archived counters are read-only: no rename, edit or archive. -->
+        <h2
+          class="font-label text-accent flex min-h-12 min-w-0 flex-1 items-center text-xl font-semibold tracking-wider wrap-break-word uppercase"
+        >
+          <span id={titleId}>{counter.title}</span>
+        </h2>
+      {:else}
         <CounterTitle
           id={counter.id}
           title={counter.title}
@@ -133,34 +141,34 @@
           href={resolve("/counters/[id]/edit", { id: counter.id })}
           aria-label={`Edit ${counter.title}`}
           title="Edit"
-          class="ui-btn-icon -mt-1.5 shrink-0"
+          class="ui-btn-icon shrink-0"
         >
           <PencilLine size={22} aria-hidden="true" />
         </a>
-        {#if !counter.is_archived}
-          <button
-            type="button"
-            onclick={() => {
-              changeFailed = null;
-              archiveOpen = true;
-            }}
-            aria-label={`Archive ${counter.title}`}
-            title="Archive"
-            class="ui-btn-icon -mt-1.5 shrink-0"
-          >
-            <Archive size={22} aria-hidden="true" />
-          </button>
-        {/if}
-      </div>
-      {#if counter.description}
-        <p class="text-ink-muted mt-0.5 line-clamp-2 pr-3 leading-snug">
-          {counter.description}
-        </p>
+        <button
+          type="button"
+          onclick={() => {
+            changeFailed = null;
+            archiveOpen = true;
+          }}
+          aria-label={`Archive ${counter.title}`}
+          title="Archive"
+          class="ui-btn-icon shrink-0"
+        >
+          <Archive size={22} aria-hidden="true" />
+        </button>
       {/if}
     </div>
+    {#if counter.description}
+      <p class="text-ink-muted line-clamp-2 pr-3 leading-snug">
+        {counter.description}
+      </p>
+    {/if}
+  </div>
 
+  <div class="flex flex-1">
     <!-- Controls sit at the card's foot so a row of cards lines them up. -->
-    <div class="flex flex-1 flex-col px-4 pt-3 pb-4">
+    <div class="flex min-w-0 flex-1 flex-col px-4 pt-3 pb-4">
       <DrumRegister {value} label={counter.title} />
       <div aria-live="assertive">
         {#if failed}
@@ -173,8 +181,13 @@
           </p>
         {/if}
       </div>
+      <!-- Empty goal lines take no room on phone; from sm up they keep
+           their height so cards in a grid row stay aligned. -->
       <p
-        class="font-label text-ink-muted mt-2 h-6 text-lg tracking-wider uppercase"
+        class={[
+          "font-label text-ink-muted mt-2 h-6 text-lg tracking-wider uppercase",
+          goal === null && !counter.is_archived && "hidden sm:block",
+        ]}
       >
         {#if goal !== null}
           {`of ${goal}${reached ? " · " : ""}`}{#if reached}<span
@@ -244,12 +257,13 @@
         </form>
       {/if}
     </div>
+    {#if goal !== null}
+      <!-- The glass runs beside the register and buttons. -->
+      <div class="pt-3 pr-4 pb-4">
+        <GoalGauge {value} {goal} />
+      </div>
+    {/if}
   </div>
-  {#if goal !== null}
-    <div class="py-4 pr-4">
-      <GoalGauge {value} {goal} />
-    </div>
-  {/if}
 </article>
 
 <ConfirmDialog

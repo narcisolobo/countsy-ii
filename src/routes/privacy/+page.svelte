@@ -1,6 +1,6 @@
 <svelte:head><title>Privacy Policy · Countsy</title></svelte:head>
 
-<div class="mx-auto min-h-[70vh] max-w-2xl px-4 py-12">
+<div class="mx-auto w-full max-w-2xl px-4 py-12">
   <h1 class="font-label mb-4 text-3xl font-bold tracking-wider uppercase">
     Privacy Policy
   </h1>

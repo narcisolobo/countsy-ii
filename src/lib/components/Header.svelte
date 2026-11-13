@@ -16,6 +16,9 @@
       Countsy
     </a>
     <ThemeToggle />
-    <Menu {signedIn} />
+    <!-- Signed out, the menu would only offer the page you're on. -->
+    {#if signedIn}
+      <Menu />
+    {/if}
   </nav>
 </header>

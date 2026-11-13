@@ -84,7 +84,7 @@
           if (e.key === "Escape") stopEditing();
         }}
         onblur={stopEditing}
-        class="ui-input font-label min-h-10! py-1 text-xl font-semibold tracking-wider uppercase"
+        class="ui-input font-label text-xl font-semibold tracking-wider uppercase"
       />
     </form>
   {:else}
@@ -95,7 +95,7 @@
           editing = true;
           failed = false;
         }}
-        class="font-label text-accent flex min-h-9 w-full cursor-pointer items-center rounded-sm text-left text-xl font-semibold tracking-wider wrap-break-word uppercase focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        class="font-label text-accent flex min-h-12 w-full cursor-pointer items-center rounded-sm text-left text-xl font-semibold tracking-wider wrap-break-word uppercase focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
         <span class="sr-only">Rename </span><span id={labelId}>{title}</span>
       </button>

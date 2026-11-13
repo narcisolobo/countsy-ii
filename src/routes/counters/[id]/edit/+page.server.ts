@@ -22,6 +22,8 @@ export const load: PageServerLoad = async ({
     .maybeSingle();
 
   if (!counter) error(404, "Counter not found.");
+  // Archived counters are read-only; send the user to where they live.
+  if (counter.is_archived) redirect(303, "/counters?show=archived");
   return { counter };
 };
 
@@ -73,6 +75,7 @@ export const actions: Actions = {
         goal,
       })
       .eq("id", params.id)
+      .eq("is_archived", false) // archived counters are read-only
       .select("id");
 
     if (dbError || data.length === 0) {

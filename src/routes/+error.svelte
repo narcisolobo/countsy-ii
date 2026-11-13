@@ -10,7 +10,7 @@
   ></svelte:head
 >
 
-<section class="mx-auto min-h-[50vh] max-w-5xl px-4 py-12">
+<section class="mx-auto w-full max-w-5xl px-4 py-12">
   <h1 class="font-label mb-4 text-3xl font-bold tracking-wider uppercase">
     {notFound ? "Not found" : "Something went wrong"}
   </h1>

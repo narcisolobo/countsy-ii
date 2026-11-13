@@ -141,16 +141,6 @@
   }
 }
 
-/* react-hot-toast, restyled with the palette. */
-.toast-meter {
-  background: var(--surface) !important;
-  color: var(--ink) !important;
-  border: 2px solid var(--ink-muted);
-  border-radius: 2px !important;
-  font-weight: 500;
-  box-shadow: none !important;
-}
-
 /*
  * Theme toggle icon: CSS picks it, so server-rendered HTML is right on first
  * paint. Moon offers dark while light is showing; sun offers light.

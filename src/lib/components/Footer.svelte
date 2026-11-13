@@ -2,7 +2,7 @@
   import { resolve } from "$app/paths";
 </script>
 
-<footer class="text-ink-muted mx-auto mt-12 max-w-5xl px-4 text-sm">
+<footer class="text-ink-muted mx-auto mt-12 w-full max-w-5xl px-4 text-sm">
   <div
     class="border-line flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t py-6"
   >

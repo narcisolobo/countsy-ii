@@ -21,10 +21,10 @@
 </script>
 
 <div
-  class="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-8"
+  class="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-4 py-8"
 >
   <h1 class="font-label text-3xl font-bold tracking-wider uppercase">
-    Countsy
+    Sign in
   </h1>
   <p class="text-ink-muted mt-2">
     Countsy keeps a running count of anything you want to track. Create a
@@ -170,5 +170,29 @@
     font-weight: 500;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  /* Google's published dark theme for the button, following the app theme. */
+  :global(:root[data-theme="dark"]) .gsi-button {
+    border-color: #8e918f;
+    background-color: #131314;
+    color: #e3e3e3;
+  }
+  :global(:root[data-theme="dark"]) .gsi-button:hover .gsi-state,
+  :global(:root[data-theme="dark"]) .gsi-button:active .gsi-state,
+  :global(:root[data-theme="dark"]) .gsi-button:focus .gsi-state {
+    background-color: #e3e3e3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .gsi-button {
+      border-color: #8e918f;
+      background-color: #131314;
+      color: #e3e3e3;
+    }
+    :global(:root:not([data-theme="light"])) .gsi-button:hover .gsi-state,
+    :global(:root:not([data-theme="light"])) .gsi-button:active .gsi-state,
+    :global(:root:not([data-theme="light"])) .gsi-button:focus .gsi-state {
+      background-color: #e3e3e3;
+    }
   }
 </style>

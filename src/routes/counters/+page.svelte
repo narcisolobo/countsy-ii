@@ -2,7 +2,6 @@
   import { enhance, type SubmitFunction } from "$app/forms";
   import { resolve } from "$app/paths";
   import CounterCard from "#lib/components/counters/CounterCard.svelte";
-  import Plus from "@lucide/svelte/icons/plus";
   import type { PageProps } from "./$types";
 
   let { data, form }: PageProps = $props();
@@ -44,7 +43,7 @@
 
 <svelte:head><title>Counters · Countsy</title></svelte:head>
 
-<section class="mx-auto max-w-5xl px-4 py-6">
+<section class="mx-auto w-full max-w-5xl px-4 py-6">
   <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
     <h1 class="font-label text-3xl font-bold tracking-wider uppercase">
       Counters
@@ -104,19 +103,6 @@
           showArchived={data.showArchived}
         />
       {/each}
-      <form
-        method="POST"
-        action={createAction}
-        use:enhance={create}
-        class="flex"
-      >
-        <button
-          disabled={creating}
-          class="border-ink-muted text-ink-muted hover:border-ink hover:text-ink font-label focus-visible:outline-accent flex min-h-56 flex-1 cursor-pointer items-center justify-center gap-2 rounded-sm border-2 border-dashed text-xl font-semibold tracking-wider uppercase transition-colors focus-visible:outline-3 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          <Plus aria-hidden="true" /> New counter
-        </button>
-      </form>
     </div>
   {/if}
 </section>

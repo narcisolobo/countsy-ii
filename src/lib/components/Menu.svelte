@@ -4,8 +4,6 @@
   import CircleUserRound from "@lucide/svelte/icons/circle-user-round";
   import X from "@lucide/svelte/icons/x";
 
-  let { signedIn }: { signedIn: boolean } = $props();
-
   let dialog: HTMLDialogElement | undefined;
   let open = $state(false);
 
@@ -52,28 +50,20 @@
       type="button"
       aria-label="Close menu"
       onclick={hide}
-      class="ui-btn-icon ml-auto size-10"
+      class="ui-btn-icon ml-auto"
     >
       <X aria-hidden="true" />
     </button>
-    {#if signedIn}
-      <a
-        href={resolve("/counters")}
-        onclick={hide}
-        class="hover:bg-page block rounded-sm px-3 py-3 text-lg">Counters</a
+    <a
+      href={resolve("/counters")}
+      onclick={hide}
+      class="hover:bg-page block rounded-sm px-3 py-3 text-lg">Counters</a
+    >
+    <form method="POST" action="/auth/sign-out">
+      <button
+        class="hover:bg-page block w-full cursor-pointer rounded-sm px-3 py-3 text-left text-lg"
+        >Sign out</button
       >
-      <form method="POST" action="/auth/sign-out">
-        <button
-          class="hover:bg-page block w-full cursor-pointer rounded-sm px-3 py-3 text-left text-lg"
-          >Sign out</button
-        >
-      </form>
-    {:else}
-      <a
-        href={resolve("/")}
-        onclick={hide}
-        class="hover:bg-page block rounded-sm px-3 py-3 text-lg">Sign in</a
-      >
-    {/if}
+    </form>
   </nav>
 </dialog>

@@ -118,6 +118,7 @@ export const actions: Actions = {
       .from("counters")
       .update({ title })
       .eq("id", id)
+      .eq("is_archived", false) // archived counters are read-only
       .select("id");
 
     // No row back: not found, or not this user's counter (RLS hid it).
