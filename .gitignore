@@ -33,3 +33,6 @@ vite.config.ts.timestamp-*
 
 # Supabase CLI cache
 supabase/.temp
+
+# Saved counters
+saved-counters.png
