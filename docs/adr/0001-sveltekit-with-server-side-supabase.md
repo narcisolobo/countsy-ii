@@ -72,4 +72,21 @@ Accessibility 100, Best Practices 100, SEO 92. CLS is just over Google's 0.1 "go
 
 ## Results
 
-*To be filled in after the switch: JS sent per page, Lighthouse (mobile), and time until the counter list appears on throttled 4G, each compared with the baseline.*
+### JavaScript sent per page
+
+Measured on 2026-11-13 from a production build of `svelte-rewrite` (9bbb0b0). Each figure is the page's chunks and their static imports, plus what every page loads: the client entry and router, the root layout and the root error page. Sizes are gzipped at level 9.
+
+| Page | Gzipped | Minified | Change from 183 kB |
+| --- | --- | --- | --- |
+| `/` (sign-in) | 47 kB | 120 kB | −74% |
+| `/counters` | 52 kB | 132 kB | −72% |
+| `/counters/[id]/edit` | 49 kB | 122 kB | −73% |
+| `/privacy` | 45 kB | 115 kB | −75% |
+
+All client JavaScript in the build comes to 59 kB gzipped. None of it is Supabase code: the SDK runs only on the server.
+
+The counters page came in above the 25–35 kB estimate. About 35 kB of every page is the framework itself: the Svelte runtime is 19.5 kB and SvelteKit's client router is 15.7 kB. The estimate counted the components but not that floor. The empty page from build step 1 already shipped 32 kB. On top of the floor, the root layout and shared components add about 10 kB, and the counters page adds 7 kB of its own.
+
+### Still to measure
+
+Lighthouse (mobile) and the time until the counter list appears on throttled 4G. These need the production deployment, so they will be run after the cutover with the method used for the baseline.
