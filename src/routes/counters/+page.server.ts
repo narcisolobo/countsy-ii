@@ -4,6 +4,17 @@ import type { Actions, PageServerLoad } from "./$types";
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 /** Combined quick taps stay small; anything bigger is not a tap. */
 const MAX_STEP = 1000;
+/** Matches the counters_title_check constraint. */
+const TITLE_MAX = 24;
+
+/**
+ * Script requests (the card's fetch, use:enhance) ask for JSON and get data
+ * back. A plain form post (no JavaScript) gets a fresh GET instead, so
+ * refreshing the page can never submit the same action twice.
+ */
+function fromScript(request: Request) {
+  return request.headers.get("accept")?.includes("application/json") ?? false;
+}
 
 export const load: PageServerLoad = async ({ locals: { supabase } }) => {
   // No user filter needed: RLS only returns the caller's rows.
@@ -50,12 +61,53 @@ export const actions: Actions = {
       return fail(error ? 500 : 404, { id, failed: true as const });
     }
 
-    // A plain form post (no JavaScript) gets a fresh GET, so refreshing the
-    // page can't submit the tap a second time. The card's script asks for
-    // JSON and gets the stored value instead.
-    if (!request.headers.get("accept")?.includes("application/json")) {
-      redirect(303, "/counters");
-    }
+    if (!fromScript(request)) redirect(303, "/counters");
     return { id, value };
+  },
+
+  /**
+   * Adds a counter named "Counter N" (N = active counters + 1, as the React
+   * app did). The page opens the new card in rename mode.
+   */
+  create: async ({ request, locals: { supabase } }) => {
+    const { count } = await supabase
+      .from("counters")
+      .select("id", { count: "exact", head: true })
+      .eq("is_archived", false);
+
+    // user_id defaults to auth.uid(); RLS checks it on insert.
+    const { data, error } = await supabase
+      .from("counters")
+      .insert({ title: `Counter ${(count ?? 0) + 1}` })
+      .select("id")
+      .single();
+
+    if (error) return fail(500, { createFailed: true as const });
+    if (!fromScript(request)) redirect(303, "/counters");
+    return { created: data.id };
+  },
+
+  /** Renames a counter. Same rules as the column: 1–24 characters, trimmed. */
+  rename: async ({ request, locals: { supabase } }) => {
+    const form = await request.formData();
+    const id = String(form.get("id") ?? "");
+    const title = String(form.get("title") ?? "").trim();
+
+    if (!UUID.test(id) || title.length < 1 || title.length > TITLE_MAX) {
+      return fail(400, { id, renameFailed: true as const });
+    }
+
+    const { data, error } = await supabase
+      .from("counters")
+      .update({ title })
+      .eq("id", id)
+      .select("id");
+
+    // No row back: not found, or not this user's counter (RLS hid it).
+    if (error || data.length === 0) {
+      return fail(error ? 500 : 404, { id, renameFailed: true as const });
+    }
+    if (!fromScript(request)) redirect(303, "/counters");
+    return { id, title };
   },
 };

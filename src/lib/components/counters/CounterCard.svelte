@@ -4,6 +4,7 @@
   import Minus from "@lucide/svelte/icons/minus";
   import Plus from "@lucide/svelte/icons/plus";
   import DrumRegister from "./DrumRegister.svelte";
+  import CounterTitle from "./CounterTitle.svelte";
   import GoalGauge from "./GoalGauge.svelte";
 
   type CardCounter = Pick<
@@ -11,7 +12,10 @@
     "id" | "title" | "description" | "value" | "goal" | "is_archived"
   >;
 
-  let { counter }: { counter: CardCounter } = $props();
+  let {
+    counter,
+    justCreated = false,
+  }: { counter: CardCounter; justCreated?: boolean } = $props();
 
   /*
    * Optimistic counting. The number shown is
@@ -94,13 +98,15 @@
 >
   <div class="flex min-w-0 flex-1 flex-col">
     <div class="pt-3 pr-1 pl-4">
-      <!-- Slices 3–5 add rename, edit and archive controls to this row. -->
-      <h2
-        id={titleId}
-        class="font-label text-accent flex min-h-9 items-center text-xl font-semibold tracking-wider break-words uppercase"
-      >
-        {counter.title}
-      </h2>
+      <!-- Slices 4–5 add the edit and archive buttons to this row. -->
+      <div class="flex items-start gap-1">
+        <CounterTitle
+          id={counter.id}
+          title={counter.title}
+          labelId={titleId}
+          startEditing={justCreated}
+        />
+      </div>
       {#if counter.description}
         <p class="text-ink-muted mt-0.5 line-clamp-2 pr-3 leading-snug">
           {counter.description}
@@ -137,7 +143,7 @@
         <button
           name="delta"
           value="-1"
-          class="ui-btn min-h-[50px]"
+          class="ui-btn min-h-12.5"
           aria-label={`Decrease ${counter.title}`}
         >
           <Minus aria-hidden="true" />
@@ -145,7 +151,7 @@
         <button
           name="delta"
           value="1"
-          class="ui-btn min-h-[50px]"
+          class="ui-btn min-h-12.5"
           aria-label={`Increase ${counter.title}`}
         >
           <Plus aria-hidden="true" />
