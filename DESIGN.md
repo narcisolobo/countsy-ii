@@ -175,6 +175,8 @@ A cool, desaturated enamel palette with one blue and one reserved state red. Eve
 **Display/Label Font:** Barlow Condensed (500, 600, 700; fallback Barlow, system sans)
 **Body Font:** Barlow (400, 500, 600; fallback system sans)
 
+Until the web fonts load, both families render in Arial (Roboto on Android), resized with `size-adjust` and ascent/descent overrides to Barlow's metrics ("Barlow Fallback: Arial" and so on in `layout.css`). An unadjusted system font is wide enough to wrap the header buttons onto a second row, so the swap would move the whole list. These are stand-ins, not part of the type system.
+
 **Character:** Stenciled, engineering-plate condensed capitals over a neutral grotesque body, with tabular numerals for the register.
 
 ### Hierarchy
