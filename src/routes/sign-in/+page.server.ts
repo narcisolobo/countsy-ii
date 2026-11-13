@@ -1,5 +1,11 @@
+import { PUBLIC_SUPABASE_URL } from "$app/env/public";
 import { fail, redirect } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
+
+// Kit 3 refuses external redirects unless allowed. OAuth starts at the
+// Supabase project's /auth/v1/authorize, which forwards to Google, so that
+// one origin is the only external target this page may redirect to.
+const SUPABASE_ORIGIN = new URL(PUBLIC_SUPABASE_URL).origin;
 
 export const load: PageServerLoad = ({ url }) => ({
   linkError: url.searchParams.get("error") === "link",
@@ -36,6 +42,6 @@ export const actions: Actions = {
     if (error || !data.url) {
       return fail(500, { message: "Google sign-in is unavailable right now." });
     }
-    redirect(303, data.url);
+    redirect(303, data.url, { external: [SUPABASE_ORIGIN] });
   },
 };
