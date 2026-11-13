@@ -45,6 +45,30 @@
         "value": "#e3e3e3",
         "createdAt": "2026-11-13T20:16:05.339Z",
         "reason": "Google Sign-In button dark theme, from Google's branding guidelines; only used on that button (src/routes/+page.svelte). Finish review fix #4."
+      },
+      {
+        "rule": "design-system-font",
+        "value": "barlow fallback: arial",
+        "createdAt": "2026-11-13T23:49:22.860Z",
+        "reason": "metric-matched fallback; documented in DESIGN.md"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "barlow fallback: roboto",
+        "createdAt": "2026-11-13T23:50:08.639Z",
+        "reason": "metric-matched fallback; documented in DESIGN.md"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "barlow condensed fallback: arial",
+        "createdAt": "2026-11-13T23:50:33.267Z",
+        "reason": "metric-matched fallback; documented in DESIGN.md"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "barlow condensed fallback: roboto",
+        "createdAt": "2026-11-13T23:50:50.795Z",
+        "reason": "metric-matched fallback; documented in DESIGN.md"
       }
     ]
   }
