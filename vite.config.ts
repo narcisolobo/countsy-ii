@@ -12,7 +12,9 @@ export default defineConfig({
         runes: ({ filename }) =>
           filename.split(/[/\\]/).includes("node_modules") ? undefined : true,
       },
-      adapter: adapter(),
+      // sfo1 sits next to the Supabase project (us-west-1); every request
+      // goes function → database, so keep them close (ADR 0001).
+      adapter: adapter({ regions: ["sfo1"] }),
     }),
   ],
 });
