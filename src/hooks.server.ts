@@ -45,11 +45,19 @@ export const handle: Handle = async ({ event, resolve }) => {
     : null;
 
   const path = event.url.pathname;
+
+  // `/` is the sign-in screen; the React app's /sign-in links still land.
+  if (path === "/sign-in") redirect(308, `/${event.url.search}`);
+
   const isProtected = PROTECTED.some(
     (p) => path === p || path.startsWith(`${p}/`),
   );
-  if (isProtected && !event.locals.user) redirect(303, "/sign-in");
-  if (path === "/sign-in" && event.locals.user) redirect(303, "/counters");
+  if (isProtected && !event.locals.user) redirect(303, "/");
+  // GET only: a signed-in visitor skips the sign-in screen, but form posts
+  // to `/` are never redirected away from their action.
+  if (path === "/" && event.locals.user && event.request.method === "GET") {
+    redirect(303, "/counters");
+  }
 
   return resolve(event);
 };

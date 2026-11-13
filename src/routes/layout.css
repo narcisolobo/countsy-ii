@@ -150,3 +150,13 @@
   font-weight: 500;
   box-shadow: none !important;
 }
+
+/* Browser surfaces carry the palette too. */
+::selection {
+  background-color: var(--accent);
+  color: var(--page);
+}
+input,
+textarea {
+  caret-color: var(--accent);
+}

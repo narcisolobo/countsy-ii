@@ -40,7 +40,11 @@ export const actions: Actions = {
       options: { redirectTo: `${url.origin}/auth/callback` },
     });
     if (error || !data.url) {
-      return fail(500, { message: "Google sign-in is unavailable right now." });
+      return fail(500, {
+        google: true,
+        message:
+          "Google sign-in isn't working right now. Use the email link instead.",
+      });
     }
     redirect(303, data.url, { external: [SUPABASE_ORIGIN] });
   },

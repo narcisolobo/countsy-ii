@@ -18,5 +18,5 @@ export const GET: RequestHandler = async ({ url, locals: { supabase } }) => {
   // No code means Supabase or Google reported a problem (expired link,
   // cancelled consent), or the link was opened in a different browser than
   // the one that asked for it, so the verifier cookie is missing.
-  redirect(303, "/sign-in?error=link");
+  redirect(303, "/?error=link");
 };

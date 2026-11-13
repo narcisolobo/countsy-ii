@@ -1,3 +1,21 @@
 {
-  "buildPath": "code"
+  "buildPath": "code",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "roboto",
+        "createdAt": "2026-11-13T18:49:21.789Z",
+        "reason": "Google Sign-In branding guidelines mandate Roboto on the Google button; incumbent React button (main:src/styles/google.module.css) used it"
+      },
+      {
+        "rule": "overused-font",
+        "value": "roboto",
+        "createdAt": "2026-11-13T18:51:18.135Z",
+        "reason": "Google Sign-In branding guidelines mandate Roboto on the Google button only; incumbent React button (main:src/styles/google.module.css) used it"
+      }
+    ]
+  }
 }

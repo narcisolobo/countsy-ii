@@ -1,5 +1,7 @@
 <script lang="ts">
   import "./layout.css";
+  import Footer from "#lib/components/Footer.svelte";
+  import Header from "#lib/components/Header.svelte";
   import { page } from "$app/state";
   import type { LayoutProps } from "./$types";
 
@@ -15,4 +17,8 @@
   />
 </svelte:head>
 
-{@render children()}
+<Header />
+<main>
+  {@render children()}
+</main>
+<Footer />
