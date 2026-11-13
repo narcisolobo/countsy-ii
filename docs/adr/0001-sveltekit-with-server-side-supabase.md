@@ -1,5 +1,5 @@
 ---
-status: proposed
+status: accepted
 date: 2026-11-12
 ---
 
@@ -64,10 +64,10 @@ Accessibility 100, Best Practices 100, SEO 92. CLS is just over Google's 0.1 "go
 ## Consequences
 
 - **Every increment goes through the server.** Requests go browser → Vercel function → Supabase instead of straight to Supabase. Optimistic updates hide the extra time, but a rollback shows up a little later. Put the Vercel function in the same region as the Supabase project.
-- **Row level security still applies.** The server creates its Supabase client from the user's session cookie, so queries run as that user. The policies don't change.
-- **The auth callback becomes a server endpoint.** It finishes the PKCE sign-in and sets the session cookie. Sessions move from localStorage to cookies, so everyone signs in once more after the switch.
-- **Deployment changes.** Delete `vercel.json`: its catch-all redirect to `/` would break server routes. Switch Vercel's framework preset to SvelteKit. Rename `VITE_SUPABASE_*` to `PUBLIC_SUPABASE_*`. Add the preview domains to Supabase's allowed redirect URLs.
-- **No database changes during the migration.** That keeps rollback simple: revert the merge commit and Vercel redeploys the React app.
+- **Row level security still applies.** The server creates its Supabase client from the user's session cookie, so queries run as that user.
+- **The auth callback becomes a server endpoint.** It finishes the PKCE sign-in and sets the session cookie. Sessions move from localStorage to cookies, so everyone signs in once more after the switch. Magic links use the `?code=` flow rather than `token_hash`, because new free-plan projects on Supabase's default email sender can't customize email templates.
+- **Deployment changes.** Replace `vercel.json`'s catch-all redirect to `/`, which would break server routes, with `"framework": "sveltekit-1"`. That setting overrides the dashboard's Vite preset, so the preset needs no manual switch at cutover. Rename `VITE_SUPABASE_*` to `PUBLIC_SUPABASE_*`. Add the preview domains to Supabase's allowed redirect URLs.
+- **The Svelte app gets a new Supabase project.** The original plan was to leave the database alone. Instead, the old `playground` project turned out to hold another app's leftover schema and a migration with no file behind it. So the Svelte app uses a new project, `countsy`, built only from `supabase/migrations/`, and the schema was tightened along the way (stricter constraints, a description column, delete only after archiving). `playground` keeps serving the React app untouched until cutover, so rollback is still "revert the merge commit". Counts are not migrated; the only user re-enters them by hand, and anything entered in the new app after cutover would not survive a rollback. Delete `playground` once the React app is gone.
 - **Less React work in the portfolio.** Countsy stops being a React app. This is a deliberate trade, and the measurements above are the reason for it.
 
 ## Results
