@@ -15,6 +15,36 @@
         "value": "roboto",
         "createdAt": "2026-11-13T18:51:18.135Z",
         "reason": "Google Sign-In branding guidelines mandate Roboto on the Google button only; incumbent React button (main:src/styles/google.module.css) used it"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#747775",
+        "createdAt": "2026-11-13T19:59:58.660Z",
+        "reason": "Google Sign-In button colors mandated by Google branding guidelines; only used on that button (src/routes/+page.svelte)"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#303030",
+        "createdAt": "2026-11-13T19:59:58.683Z",
+        "reason": "Google Sign-In button colors mandated by Google branding guidelines; only used on that button (src/routes/+page.svelte)"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#131314",
+        "createdAt": "2026-11-13T20:16:05.300Z",
+        "reason": "Google Sign-In button dark theme, from Google's branding guidelines; only used on that button (src/routes/+page.svelte). Finish review fix #4."
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#8e918f",
+        "createdAt": "2026-11-13T20:16:05.320Z",
+        "reason": "Google Sign-In button dark theme, from Google's branding guidelines; only used on that button (src/routes/+page.svelte). Finish review fix #4."
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#e3e3e3",
+        "createdAt": "2026-11-13T20:16:05.339Z",
+        "reason": "Google Sign-In button dark theme, from Google's branding guidelines; only used on that button (src/routes/+page.svelte). Finish review fix #4."
       }
     ]
   }
