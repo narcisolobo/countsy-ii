@@ -10,33 +10,6 @@ import type { Handle } from "@sveltejs/kit/hooks";
 /** Routes that need a signed-in user. */
 const PROTECTED = ["/counters"];
 
-/**
- * Latin font files to preload, as `family-weight`. The page is server-rendered,
- * so without a preload the fonts arrive after the first paint and the swap
- * shifts the layout (ADR 0001, Results). Only fonts the first screen uses are
- * listed: a preloaded font that goes unused costs bytes and a console warning.
- */
-const FONTS_EVERYWHERE = [
-  "barlow-400",
-  "barlow-condensed-600",
-  "barlow-condensed-700",
-];
-const FONTS_BY_ROUTE: Record<string, string[]> = {
-  "/counters": ["barlow-600", "barlow-condensed-500"],
-};
-
-function preloadFont(filename: string, routeId: string | null): boolean {
-  const match = /\/(barlow(?:-condensed)?)-latin-(\d+)-normal\.woff2$/.exec(
-    filename,
-  );
-  if (!match) return false;
-  const font = `${match[1]}-${match[2]}`;
-  return (
-    FONTS_EVERYWHERE.includes(font) ||
-    (FONTS_BY_ROUTE[routeId ?? ""]?.includes(font) ?? false)
-  );
-}
-
 export const handle: Handle = async ({ event, resolve }) => {
   // One client per request, acting as whoever the session cookie says. RLS
   // does the rest. The browser never gets a Supabase client (ADR 0001), so
@@ -86,10 +59,5 @@ export const handle: Handle = async ({ event, resolve }) => {
     redirect(303, "/counters");
   }
 
-  return resolve(event, {
-    preload: (file) =>
-      file.type === "js" ||
-      file.type === "css" ||
-      (file.type === "font" && preloadFont(file.filename, event.route.id)),
-  });
+  return resolve(event);
 };
