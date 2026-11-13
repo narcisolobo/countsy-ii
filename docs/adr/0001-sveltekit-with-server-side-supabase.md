@@ -87,6 +87,23 @@ All client JavaScript in the build comes to 59 kB gzipped. None of it is Supabas
 
 The counters page came in above the 25–35 kB estimate. About 35 kB of every page is the framework itself: the Svelte runtime is 19.5 kB and SvelteKit's client router is 15.7 kB. The estimate counted the components but not that floor. The empty page from build step 1 already shipped 32 kB. On top of the floor, the root layout and shared components add about 10 kB, and the counters page adds 7 kB of its own.
 
-### Still to measure
+### Lighthouse (mobile)
 
-Lighthouse (mobile) and the time until the counter list appears on throttled 4G. These need the production deployment, so they will be run after the cutover with the method used for the baseline.
+Measured on 2026-11-13 against the production deployment (main @ 34a28ad), with the settings and method used for the baseline: Lighthouse 12.8.2, default mobile throttling, median of three runs. `/counters` was signed in to the demo account, which holds the same six counters as the baseline run, with the HTTP cache cleared before each run. `/` (the sign-in screen, which replaces `/sign-in`) was run in a fresh, signed-out Chrome.
+
+| Metric | `/` (was `/sign-in`) | `/counters` |
+|---|---|---|
+| Performance | 100 (was 98) | 94 (was 95) |
+| First Contentful Paint | 1.1 s (was 1.8 s) | 1.1 s (was 1.8 s) |
+| Largest Contentful Paint | 1.1 s (was 1.8 s) | 1.1 s (was 1.8 s) |
+| Total Blocking Time | 0 ms (was 0) | 0 ms (was 0) |
+| Cumulative Layout Shift | 0 (was 0) | 0.150 (was 0.111) |
+| Speed Index | 1.1 s (was 1.8 s) | 1.1 s (was 1.8 s) |
+| JS transferred | 52 kB of 129 kB (was 182 of 257) | 57 kB of 179 kB (was 182 of 301) |
+| Unused JS (Lighthouse estimate) | 0 (was 125 kB) | 0 (was 115 kB) |
+
+JS transferred is a little higher than the build figures above because it counts HTTP overhead. Lighthouse no longer finds any unused JavaScript to flag.
+
+The counter list is now part of the first paint, so on `/counters` the time until the list appears equals First Contentful Paint: 1.1 s on throttled 4G. On the React app the list appeared only after the Supabase request returned.
+
+Layout shift on `/counters` got worse, and the spinner is not the reason. The shift from the list replacing the spinner is gone. What remains comes from the web fonts: the five Barlow files arrive at about 450 ms, after the server-rendered grid has painted in the fallback font, and the swap moves the cards. The three runs scored 0, 0.180 and 0.150; the run with 0 was the one where the fonts arrived before the first paint. Preloading the fonts the first screen uses, or matching the fallback font's metrics, should remove most of it. That is follow-up work.
