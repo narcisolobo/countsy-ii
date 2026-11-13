@@ -7,6 +7,16 @@ const MAX_STEP = 1000;
 /** Matches the counters_title_check constraint. */
 const TITLE_MAX = 24;
 
+/** `?show=archived` lists archived counters alongside active ones. */
+function showingArchived(url: URL) {
+  return url.searchParams.get("show") === "archived";
+}
+
+/** The list the user was looking at, keeping "Show archived". */
+function listUrl(url: URL) {
+  return showingArchived(url) ? "/counters?show=archived" : "/counters";
+}
+
 /**
  * Script requests (the card's fetch, use:enhance) ask for JSON and get data
  * back. A plain form post (no JavaScript) gets a fresh GET instead, so
@@ -16,18 +26,27 @@ function fromScript(request: Request) {
   return request.headers.get("accept")?.includes("application/json") ?? false;
 }
 
-export const load: PageServerLoad = async ({ locals: { supabase } }) => {
+/** Reads and checks the counter id every per-counter action sends. */
+async function counterId(request: Request) {
+  const form = await request.formData();
+  const id = String(form.get("id") ?? "");
+  return { form, id: UUID.test(id) ? id : null };
+}
+
+export const load: PageServerLoad = async ({ url, locals: { supabase } }) => {
+  const showArchived = showingArchived(url);
+
   // No user filter needed: RLS only returns the caller's rows.
-  // Archived counters stay hidden until slice 4 adds "Show archived".
-  const { data, error } = await supabase
+  let query = supabase
     .from("counters")
     .select("id, title, description, value, goal, is_archived")
-    .eq("is_archived", false)
     .order("created_at", { ascending: true });
+  if (!showArchived) query = query.eq("is_archived", false);
+  const { data, error } = await query;
 
   // Rendered as a failed-load message on the page rather than a bare 500, so
   // the header, menu and sign-out keep working.
-  return { counters: error ? null : data };
+  return { counters: error ? null : data, showArchived };
 };
 
 export const actions: Actions = {
@@ -37,13 +56,12 @@ export const actions: Actions = {
    * requests can't overwrite each other. Returns the stored value so the card
    * can show what the database actually holds.
    */
-  step: async ({ request, locals: { supabase } }) => {
-    const form = await request.formData();
-    const id = String(form.get("id") ?? "");
+  step: async ({ request, url, locals: { supabase } }) => {
+    const { form, id } = await counterId(request);
     const delta = Number(form.get("delta"));
 
     if (
-      !UUID.test(id) ||
+      !id ||
       !Number.isInteger(delta) ||
       delta === 0 ||
       Math.abs(delta) > MAX_STEP
@@ -61,7 +79,7 @@ export const actions: Actions = {
       return fail(error ? 500 : 404, { id, failed: true as const });
     }
 
-    if (!fromScript(request)) redirect(303, "/counters");
+    if (!fromScript(request)) redirect(303, listUrl(url));
     return { id, value };
   },
 
@@ -69,7 +87,7 @@ export const actions: Actions = {
    * Adds a counter named "Counter N" (N = active counters + 1, as the React
    * app did). The page opens the new card in rename mode.
    */
-  create: async ({ request, locals: { supabase } }) => {
+  create: async ({ request, url, locals: { supabase } }) => {
     const { count } = await supabase
       .from("counters")
       .select("id", { count: "exact", head: true })
@@ -83,17 +101,16 @@ export const actions: Actions = {
       .single();
 
     if (error) return fail(500, { createFailed: true as const });
-    if (!fromScript(request)) redirect(303, "/counters");
+    if (!fromScript(request)) redirect(303, listUrl(url));
     return { created: data.id };
   },
 
   /** Renames a counter. Same rules as the column: 1–24 characters, trimmed. */
-  rename: async ({ request, locals: { supabase } }) => {
-    const form = await request.formData();
-    const id = String(form.get("id") ?? "");
+  rename: async ({ request, url, locals: { supabase } }) => {
+    const { form, id } = await counterId(request);
     const title = String(form.get("title") ?? "").trim();
 
-    if (!UUID.test(id) || title.length < 1 || title.length > TITLE_MAX) {
+    if (!id || title.length < 1 || title.length > TITLE_MAX) {
       return fail(400, { id, renameFailed: true as const });
     }
 
@@ -107,7 +124,54 @@ export const actions: Actions = {
     if (error || data.length === 0) {
       return fail(error ? 500 : 404, { id, renameFailed: true as const });
     }
-    if (!fromScript(request)) redirect(303, "/counters");
+    if (!fromScript(request)) redirect(303, listUrl(url));
     return { id, title };
   },
+
+  archive: async (event) => setArchived(event, true),
+  restore: async (event) => setArchived(event, false),
+
+  /**
+   * Deletes a counter for good. Only archived counters can be deleted: the
+   * query asks for that, and the RLS delete policy enforces it regardless.
+   */
+  delete: async ({ request, url, locals: { supabase } }) => {
+    const { id } = await counterId(request);
+    if (!id) return fail(400, { id, changeFailed: "delete" as const });
+
+    const { data, error } = await supabase
+      .from("counters")
+      .delete()
+      .eq("id", id)
+      .eq("is_archived", true)
+      .select("title");
+
+    if (error || data.length === 0) {
+      return fail(error ? 500 : 404, { id, changeFailed: "delete" as const });
+    }
+    if (!fromScript(request)) redirect(303, listUrl(url));
+    return { id, changed: "delete" as const, title: data[0].title };
+  },
 };
+
+/** Archives or restores one of the caller's counters. */
+async function setArchived(
+  { request, url, locals: { supabase } }: Parameters<Actions[string]>[0],
+  archived: boolean,
+) {
+  const change = archived ? ("archive" as const) : ("restore" as const);
+  const { id } = await counterId(request);
+  if (!id) return fail(400, { id, changeFailed: change });
+
+  const { data, error } = await supabase
+    .from("counters")
+    .update({ is_archived: archived })
+    .eq("id", id)
+    .select("title");
+
+  if (error || data.length === 0) {
+    return fail(error ? 500 : 404, { id, changeFailed: change });
+  }
+  if (!fromScript(request)) redirect(303, listUrl(url));
+  return { id, changed: change, title: data[0].title };
+}
