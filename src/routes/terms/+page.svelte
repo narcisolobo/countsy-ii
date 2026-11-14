@@ -8,7 +8,7 @@
   <h1 class="font-label mb-4 text-3xl font-bold tracking-wider uppercase">
     Terms of Service
   </h1>
-  <p class="text-ink-muted mb-8 text-sm">Effective Date: April 29, 2025</p>
+  <p class="text-ink-muted mb-8 text-sm">Effective Date: November 14, 2026</p>
   <p class="mb-4">
     Welcome to <strong>Countsy</strong> — a tool that helps you count anything and
     track everything. By using our service, you agree to the following terms.
@@ -27,8 +27,8 @@
   <h2 class="ui-label mt-8 mb-2 text-xl">3. User Accounts</h2>
   <ul class="mb-4 ml-6 list-disc">
     <li>
-      You are responsible for maintaining the confidentiality of your login
-      credentials.
+      You are responsible for keeping access to the email account or Google
+      account you sign in with secure.
     </li>
     <li>
       You agree not to use the service for any illegal or unauthorized purpose.
